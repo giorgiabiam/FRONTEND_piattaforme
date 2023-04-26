@@ -1,0 +1,36 @@
+.container{
+  display: flex;
+  margin: 82px auto 32px;
+  padding: 0 16px;
+  max-width: 960px;
+  flex-direction: column;
+  align-items: center;
+}
+
+p{
+ font-weight: bold;
+}
+
+.signin-card {
+  display: grid;
+  grid-template-columns: 400px;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-auto-flow: row;
+  justify-items: center;
+  border: solid 1px;
+}
+
+.login-card{
+  display: grid;
+  grid-template-columns: 400px;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-auto-flow: row;
+  justify-items: center;
+  border: solid 1px;
+}
+
+
+mat-form-field{
+  width: 100%;
+}
+

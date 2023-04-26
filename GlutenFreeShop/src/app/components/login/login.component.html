@@ -1,0 +1,76 @@
+<div class="container">
+  <!-- <p>LOGIN</p>
+  <div class="card">
+    <mat-form-field appearance="fill">
+      <label>username</label>
+      <input matInput [(ngModel)]="username">
+      {{username}}
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <label>password</label>
+      <input matInput [(ngModel)]="password">
+      {{password}}
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary" (click)="login()">Login</button> -->
+
+
+<form *ngIf="!nuovoUtente">
+  <div class="login-card">
+    <h2>LOGIN</h2>
+    <mat-form-field appearance="fill">
+      <label>username</label>
+      <input matInput [(ngModel)]="username">
+      {{username}}
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <label>password</label>
+      <input matInput [(ngModel)]="password">
+      {{password}}
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="login()">Login</button>
+  </div>
+</form>
+
+
+<div class="card-container">
+  <form *ngIf="nuovoUtente">
+    <div class="signin-card">
+      <h2>REGISTRATI</h2>
+      <mat-form-field appearance="fill">
+        <!-- <label>username</label> -->
+        <input placeholder="username" matInput [(ngModel)]="sign_username">
+        {{sign_username}}
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <!-- <label>password</label> -->
+        <input placeholder="password" matInput [(ngModel)]="sign_password">
+        {{sign_password}}
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <label>first name</label>
+        <input matInput [(ngModel)]="sign_firstname">
+        {{sign_firstname}}
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <label>last name</label>
+        <input matInput [(ngModel)]="sign_lastname">
+        {{sign_lastname}}
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <label>address</label>
+        <input matInput [(ngModel)]="sign_address">
+        {{sign_address}}
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        Convenzionato
+        <mat-radio-group [(ngModel)]="sign_convenzionato">
+          <mat-radio-button value="true">yes</mat-radio-button>
+          <mat-radio-button value="false">no</mat-radio-button>
+        </mat-radio-group>
+      </mat-form-field>
+    <button mat-raised-button color="primary" (click)="signin()">Sign in</button>
+    </div>
+  </form>
+</div>
+</div>

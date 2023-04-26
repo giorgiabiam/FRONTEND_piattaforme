@@ -1,0 +1,25 @@
+<div class="card-container">
+  <div class="card" *ngFor="let i of [1, 2, 3, 4, 5, 6]">
+    <!-- *ngFor="let p of prodotti" -->
+    <mat-card style="max-width: 400px; margin: 1%;">
+      <mat-card-header>
+        <mat-card-title> Nome prodotto {{i}}</mat-card-title>
+        <mat-card-subtitle>Prezzo</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="https://www.farmaexpert.it/src/29wm.php?p=EX&cat=204282.jpeg" alt="prduct image">
+      <mat-card-content>
+        <p>
+          <br><br>
+          Product description
+          <br><br>
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button>Aggiungi ai preferiti</button>
+        <button mat-raised-button>Aggiungi al carrello</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+
