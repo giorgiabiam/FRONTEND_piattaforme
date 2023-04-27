@@ -5,8 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signin', component: LoginComponent } //sempre login ma con più campi
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
