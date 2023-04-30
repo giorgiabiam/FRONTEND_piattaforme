@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HomeService } from 'src/app/services/homeService';
+import { HomeService } from 'src/app/services/home-service.service';
 
 @Component({
   selector: 'app-prodotti',
@@ -7,13 +7,16 @@ import { HomeService } from 'src/app/services/homeService';
   styleUrls: ['./prodotti.component.css']
 })
 export class ProdottiComponent {
-  prodotti=[];
+  prodotti: any = [];
 
-  constructor(private homeService: HomeService) {}
+  constructor(private home_service: HomeService) {}
 
   ngOnInit() {
-    // this.homeService.getAllProdotti();
-    console.log("init prodotti")
+    this.home_service.getAllProdotti().subscribe(data => {
+
+      console.log("GET PRODOTTI", data);
+      this.prodotti = data;
+    });
   }
 
 }

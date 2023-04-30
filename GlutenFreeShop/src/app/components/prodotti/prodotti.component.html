@@ -1,20 +1,24 @@
+
 <div class="card-container">
-  <div class="card" *ngFor="let i of [1, 2, 3, 4, 5, 6]">
-    <!-- *ngFor="let p of prodotti" -->
+  <div class="card" *ngFor="let p of prodotti">
+    <!-- *ngFor="let i of [1, 2, 3, 4, 5, 6]" -->
     <mat-card style="max-width: 400px; margin: 1%;">
       <mat-card-header>
-        <mat-card-title> Nome prodotto {{i}}</mat-card-title>
-        <mat-card-subtitle>Prezzo</mat-card-subtitle>
+        <mat-card-title> {{p.nome}}</mat-card-title>
+        <mat-card-subtitle>Prezzo: {{p.prezzo}} €</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src="https://www.farmaexpert.it/src/29wm.php?p=EX&cat=204282.jpeg" alt="prduct image">
+      <img mat-card-image [src]="p.img" alt="prduct image">
       <mat-card-content>
         <p>
           <br><br>
-          Product description
+          {{p.descrizione}}
           <br><br>
         </p>
       </mat-card-content>
       <mat-card-actions>
+        <button mat-icon-button color="warn">
+          <mat-icon>favorite</mat-icon>
+        </button>
         <button mat-raised-button>Aggiungi ai preferiti</button>
         <button mat-raised-button>Aggiungi al carrello</button>
       </mat-card-actions>
