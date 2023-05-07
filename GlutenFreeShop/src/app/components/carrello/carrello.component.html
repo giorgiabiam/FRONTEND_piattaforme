@@ -1,0 +1,20 @@
+<div class="container">
+  <div>
+    <ul>
+      aaaaaa
+      //TODO
+      <li *ngFor="let p of carrello">
+        <div>
+          <img [src]="p.img" alt="product image">
+          {{p.nome}}  quantità e prezzo singolo
+        </div>
+      </li>
+    </ul>
+    <h2> {{totale}}</h2>
+    ricordati di chiedere al checkout se vuole usare il buono celiachia per il pagamento
+  </div>
+
+  <div>
+    <button (click)="procedi()">Procedi all'ordine</button>
+  </div>
+</div>

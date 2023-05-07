@@ -1,26 +1,19 @@
-
 <div class="card-container">
   <div class="card" *ngFor="let p of prodotti">
-    <!-- *ngFor="let i of [1, 2, 3, 4, 5, 6]" -->
-    <mat-card style="max-width: 400px; margin: 1%;">
+    <mat-card>
       <mat-card-header>
         <mat-card-title> {{p.nome}}</mat-card-title>
-        <mat-card-subtitle>Prezzo: {{p.prezzo}} €</mat-card-subtitle>
+        <mat-card-subtitle>Prezzo: <span style="font-weight: bold;"> {{p.prezzo}} €</span></mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image [src]="p.img" alt="prduct image">
+      <img mat-card-image [src]="p.img" alt="prduct image" style="max-height: 392px;">
       <mat-card-content>
-        <p>
-          <br><br>
-          {{p.descrizione}}
-          <br><br>
-        </p>
+        <br><br>
+        <h3>{{p.descrizione}}</h3>
+        <br><br>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-icon-button color="warn">
-          <mat-icon>favorite</mat-icon>
-        </button>
-        <button mat-raised-button>Aggiungi ai preferiti</button>
-        <button mat-raised-button>Aggiungi al carrello</button>
+        <button mat-raised-button  (click)="addToFav()">Aggiungi ai preferiti<mat-icon>favorite</mat-icon></button>
+        <button mat-raised-button  (click)="addToCart()">Aggiungi al carrello<mat-icon>shopping_cart</mat-icon></button>
       </mat-card-actions>
     </mat-card>
   </div>

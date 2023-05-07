@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProdottiComponent } from './components/prodotti/prodotti.component';
 
@@ -20,14 +19,18 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatInputModule} from '@angular/material/input';
+import {MatBadgeModule} from '@angular/material/badge';
+import { CarrelloComponent } from './components/carrello/carrello.component';
+import { AreaPersonaleComponent } from './components/area-personale/area-personale.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     HomeComponent,
-    ProdottiComponent
+    ProdottiComponent,
+    CarrelloComponent,
+    AreaPersonaleComponent
   ],
   imports: [
     HttpClientModule,
@@ -39,7 +42,8 @@ import {MatInputModule} from '@angular/material/input';
     MatIconModule,
     FormsModule,
     MatRadioModule,
-    MatInputModule
+    MatInputModule,
+    MatBadgeModule
   ],
   providers: [HomeService, UserService],
   bootstrap: [AppComponent]

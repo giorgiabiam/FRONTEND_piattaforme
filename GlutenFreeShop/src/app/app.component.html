@@ -1,18 +1,33 @@
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
-  <img
-    width="50"
-    alt="Logo"
-    src="https://celiachiastore.it/wp-content/uploads/2020/06/cropped-celiachia-store-logo-base-new-1.png"
-  />
-  <span>Welcome - {{ title }}</span>
+  <a href="#">
+    <img width="80px" alt="Logo" src="https://www.lineadiciotto.it/img/cms/Schermata%202019-02-17%20alle%2018-21-35.png">
+  </a>
+    <!-- https://celiachiastore.it/wp-content/uploads/2020/06/cropped-celiachia-store-logo-base-new-1.png"/> -->
 
-  <div style="position: end;">
-    <!-- icon carrello -->
-    <mat-icon></mat-icon>
-    //TODO icona carrello
+  <div style="margin: 2%;">
+    <span style="font-size: medium; font-style:oblique ;">Welcome - Gluten Free Shop</span>
   </div>
 
+  <div class="nav-search">
+    <input type="text" matInput placeholder="Cerca prodotti" style="width: 90%; border-radius: 25px; margin-left: 3px;">
+    <button mat-icon-button><mat-icon>search</mat-icon></button>
+  </div>
+
+  <div class="nav-area-personale">
+    <a class="card" href="/login">AREA PERSONALE</a>
+  </div>
+
+  <div>
+    <a href="/carrello" class="icona-carrello">
+      <mat-icon matBadge="0" >shopping_cart</mat-icon>
+      //per vedere il contenuto del carrello devi andare in area personale
+    </a>
+  </div>
+
+  <div *ngIf="loggato">
+    <a href>Logout</a>
+  </div>
 </div>
 
 <div>

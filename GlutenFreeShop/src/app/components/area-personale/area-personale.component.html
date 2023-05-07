@@ -1,0 +1,75 @@
+<div class="container">
+
+  <div *ngIf="loggato">
+    <div class="card">
+
+    </div>
+  </div>
+
+   <form *ngIf="!nuovoUtente && !loggato">
+    <div class="card">
+      <h2>LOGIN</h2>
+      <mat-form-field appearance="outline">
+        <label>username</label>
+        <input matInput [(ngModel)]="username" required>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <label>password</label>
+        <input matInput [(ngModel)]="password" [type]="hide ? 'password' : 'text'" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="login()">Login</button>
+      <br>
+      <span>
+        <button mat-button color="primary" (click)="nuovoUtente=true">Crea un nuovo account</button>
+      </span>
+    </div>
+  </form>
+
+  <!-- TODO messaggio di errore credenziali e campi rossi -->
+
+  <form *ngIf="nuovoUtente && !loggato" >
+    <div class="card">
+      <h2>REGISTRATI</h2>
+      <mat-form-field appearance="outline">
+        <label>username</label>
+        <input matInput [(ngModel)]="sign_username" required>
+        <!-- TODO -->
+        <!-- <span *ngIf="!sign_username" style="color: red;">username field cannot be empty</span> -->
+        <!--   -->
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <label>password</label>
+        <input matInput placeholder="minimum 4 characters" matInput [(ngModel)]="sign_password" [type]="hide ? 'password' : 'text'" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <label>first name</label>
+        <input matInput [(ngModel)]="sign_firstname" required>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <label>last name</label>
+        <input matInput [(ngModel)]="sign_lastname" required>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <label>address</label>
+        <input matInput [(ngModel)]="sign_address" placeholder="Es: Via Aldo Moro, 24 Torano Castello" required>
+      </mat-form-field>
+      <mat-radio-group [(ngModel)]="sign_convenzionato" required>
+        <h3 style="margin-left: 3%;">Sei possessore del buono celiachia mensile?</h3>
+        <mat-radio-button value="true">si</mat-radio-button>
+        <mat-radio-button value="false">no</mat-radio-button>
+      </mat-radio-group>
+      <button mat-raised-button color="primary" (click)="signin()">Sign in</button>
+      <br>
+      <span>
+        Hai già un account? <button mat-button color="primary" (click)="nuovoUtente=false">accedi</button>
+      </span>
+    </div>
+  </form>
+
+  </div>

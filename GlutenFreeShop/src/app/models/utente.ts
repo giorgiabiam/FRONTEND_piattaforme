@@ -6,17 +6,15 @@ export class Utente{
   cognome: String;
   indirizzo: String;
   convenzionato: boolean;
-  saldo: DoubleRange;
-  listaAcquisti: any;
 
-  constructor(username: string, password:string, nome:string, cognome:string, indirizzo:string,
-    convenzionato: boolean, saldo: DoubleRange){
+  constructor(username: String, password:String, nome:String, cognome:String, indirizzo:String,
+    convenzionato: boolean){
       this.username=username;
       this.password=password;
       this.nome=nome;
       this.cognome=cognome;
       this.indirizzo=indirizzo;
       this.convenzionato=convenzionato;
-      this.saldo=saldo;
+       //il saldo è gestito nel backend
   }
 }
