@@ -11,7 +11,7 @@
 .card{
   display: grid;
   grid-template-columns: 400px;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 50px 50px 1fr 1fr ;
   grid-auto-flow: row;
   justify-items: center;
   border: solid 1px cadetblue;
@@ -19,5 +19,11 @@
 
 mat-form-field{
   width: 95%;
+}
+
+.preferiti{
+  display: flex;
+  justify-items: center;
+  border: solid 1px cadetblue;
 }
 

@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProdottiComponent } from './components/prodotti/prodotti.component';
+import { CarrelloComponent } from './components/carrello/carrello.component';
+import { AreaPersonaleComponent } from './components/area-personale/area-personale.component';
 
 import { HomeService } from './services/home-service.service';
 import { UserService } from './services/user-service.service';
@@ -20,9 +22,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatInputModule} from '@angular/material/input';
 import {MatBadgeModule} from '@angular/material/badge';
-import { CarrelloComponent } from './components/carrello/carrello.component';
-import { AreaPersonaleComponent } from './components/area-personale/area-personale.component';
-
 
 @NgModule({
   declarations: [

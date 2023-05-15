@@ -1,7 +1,36 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <a href="#">
+    <img width="80px" alt="Logo" src="https://www.lineadiciotto.it/img/cms/Schermata%202019-02-17%20alle%2018-21-35.png">
+  </a>
+    <!-- https://celiachiastore.it/wp-content/uploads/2020/06/cropped-celiachia-store-logo-base-new-1.png"/> -->
 
+  <div style="margin: 2%;">
+    <span style="font-size: medium; font-style:oblique ;">Welcome - Gluten Free Shop</span>
+  </div>
+
+  <div class="nav-search">
+    <input type="text" matInput placeholder="Cerca prodotti" style="width: 90%; border-radius: 25px; margin-left: 3px;">
+    <button mat-icon-button><mat-icon>search</mat-icon></button>
+  </div>
+
+  <div class="nav-area-personale">
+    <a class="card" href="/login">AREA PERSONALE</a>
+  </div>
+
+  <div *ngIf="loggato">
+    <a href="/carrello" class="icona-carrello">
+      <mat-icon matBadge="0">shopping_cart</mat-icon>
+      <!-- per vedere il contenuto del carrello devi andare in area personale -->
+    </a>
+  </div>
+
+  <div *ngIf="loggato">
+    <a href>Logout</a>
+  </div>
+</div>
 <div class="content">
-  <!-- griglia prodotti -->
-  <app-prodotti></app-prodotti>
+  <router-outlet></router-outlet>
 </div>
 
 

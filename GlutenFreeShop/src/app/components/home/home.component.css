@@ -6,3 +6,39 @@
   flex-direction: column;
   align-items: center;
 }
+
+
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  background-color: #1976d2;
+  color: white;
+}
+
+.toolbar img {
+  margin: 0 16px;
+}
+
+.nav-area-personale{
+  margin: 3%;
+}
+
+.nav-search{
+  display: flex;
+  align-items: center;
+  background-image: linear-gradient(to right, yellow , #248ef7, rgb(0, 209, 7));
+  width: 800px;
+  border-radius: 25px;
+  margin: 2%;
+}
+
+.icona-carrello{
+
+}
+
+

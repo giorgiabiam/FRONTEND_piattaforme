@@ -2,13 +2,21 @@
 
   <div *ngIf="loggato">
     <div class="card">
-
+      <h2>  Ciao {{utente.nome}} ! </h2>
+      <button mat-button color="primary" (click)="showPreferiti()"><mat-icon>favorite</mat-icon>Visualizza preferiti</button>
+      <button mat-button color="primary"><mat-icon>shopping_cart</mat-icon>
+        <a href="/carrello">Visualizza carrello</a>
+      </button>
+      <button mat-button color="primary"><mat-icon>edit</mat-icon>Modifica profilo</button>
+      <br>
+      <button mat-raised-button color="primary" (click)="logout()">Logout</button>
     </div>
   </div>
 
    <form *ngIf="!nuovoUtente && !loggato">
     <div class="card">
       <h2>LOGIN</h2>
+      <span *ngIf="!login_ok" style="color: red;">ERRORE LOGIN</span>
       <mat-form-field appearance="outline">
         <label>username</label>
         <input matInput [(ngModel)]="username" required>
@@ -33,6 +41,7 @@
   <form *ngIf="nuovoUtente && !loggato" >
     <div class="card">
       <h2>REGISTRATI</h2>
+      <span *ngIf="!signin_ok" style="color: red;">ERRORE REGISTRAZIONE</span>
       <mat-form-field appearance="outline">
         <label>username</label>
         <input matInput [(ngModel)]="sign_username" required>
@@ -72,4 +81,26 @@
     </div>
   </form>
 
+  <div *ngIf="dialog" class="preferiti">
+    <br>
+    <button mat-button (click)="dialog=false">
+      <mat-icon>close</mat-icon>
+    </button>
+    <h2>Prodotti che hai aggiunto ai preferiti</h2>
+    {{utente.preferiti}}
+    <ul>
+      <li *ngFor="let p of utente.preferiti">
+        <div>
+          <img [src]="p.img" alt="product image">
+          {{p.nome}}
+          <button mat-raised-button>rimuovi dai preferiti</button>
+        </div>
+      </li>
+    </ul>
   </div>
+
+  </div>
+
+
+
+
