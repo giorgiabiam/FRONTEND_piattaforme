@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from 'src/app/services/home-service.service';
+import { Carrello } from 'src/app/models/Carrello';
+import { Utente } from 'src/app/models/Utente';
+import { UserService } from 'src/app/services/user-service.service';
 
 @Component({
   selector: 'app-carrello',
@@ -7,10 +9,10 @@ import { HomeService } from 'src/app/services/home-service.service';
   styleUrls: ['./carrello.component.css']
 })
 export class CarrelloComponent implements OnInit {
-  carrello: any=[];
+  carrello!: Carrello;
   totale: number;
 
-  constructor(private home_service : HomeService){
+  constructor(private user_service : UserService){
     this.totale = 0;
   }
 
@@ -20,7 +22,7 @@ export class CarrelloComponent implements OnInit {
   }
 
   loadCarrello() {
-    // il carrello sta nella sessione, come lo prendo?
+    // il carrello sta nella sessione
   }
 
   calcolaTot(){
@@ -28,7 +30,18 @@ export class CarrelloComponent implements OnInit {
   }
 
   procedi(){
-    //TODO
+    let id_utente = sessionStorage.getItem("user_id")
+    this.user_service.get(id_utente).subscribe(data=>{
+      // let utente:Utente = data
+      // if(utente.convenzionato){
+      //   alert("Vuoi usare il buono celiachia?") //TODO
+      // }
+    })
+
+    this.user_service.acquista(id_utente, this.carrello).subscribe( data=>{
+      console.log("acquisto", data)
+    })
+
   }
 
 }

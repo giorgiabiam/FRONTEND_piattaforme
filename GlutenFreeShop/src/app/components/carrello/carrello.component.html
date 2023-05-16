@@ -2,7 +2,7 @@
   <div>
     <ul>
       //TODO
-      <li *ngFor="let p of carrello">
+      <li *ngFor="let p of carrello.lista_prodotti">
         <div>
           <img [src]="p.img" alt="product image">
           {{p.nome}}  quantità e prezzo singolo
@@ -15,6 +15,6 @@
   </div>
 
   <div>
-    <button (click)="procedi()">Procedi all'ordine</button>
+    <button mat-button (click)="procedi()">Procedi all'ordine</button>
   </div>
 </div>

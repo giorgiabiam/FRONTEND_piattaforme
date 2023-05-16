@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Prodotto } from 'src/app/models/Prodotto';
 import { HomeService } from 'src/app/services/home-service.service';
 import { UserService } from 'src/app/services/user-service.service';
 
@@ -8,18 +10,32 @@ import { UserService } from 'src/app/services/user-service.service';
   styleUrls: ['./prodotti.component.css']
 })
 export class ProdottiComponent {
-  prodotti: any = [];
-  loggato : boolean = false;
+  prodotti: Prodotto[] = [];
+  prodotti_filtrati: Prodotto[] = [];
 
-  constructor(private home_service: HomeService, private user_service: UserService) {}
+  loggato : boolean = false;
+  parola_chiave:string ="";
+
+  constructor(private home_service: HomeService, private user_service: UserService,
+            private router:Router) {}
 
   ngOnInit() {
+
+    console.log("prodotti-component, utente:", sessionStorage.getItem("user_id"))
+    if(sessionStorage.getItem("user_id")==null){
+      this.loggato = false
+    }
+    else{
+      this.loggato = true
+    }
     this.home_service.getAllProdotti().subscribe(data => {
-      console.log("GET PRODOTTI", data);
       this.prodotti = data;
+      console.log("GET PRODOTTI", this.prodotti);
+
       if(sessionStorage.getItem("user_id") != null) {this.loggato=true}
+      this.search();
+      console.log("prodotti filtrati", this.prodotti_filtrati)
     });
-    console.log("session get user id------", sessionStorage.getItem("user_id"))
   }
 
   addToFav(prodotto:any){
@@ -30,19 +46,28 @@ export class ProdottiComponent {
       this.user_service.addToFavorites(id_utente, prodotto);
     }
     else{
-      // redirect to /login con alert dicendo che prima ti devi loggare
       alert("Ops! per aggiungere un prodotto ai preferiti devi accedere all'area personale.");
+      this.router.navigate(['login'])
     }
   }
 
-  addToCart(){
+  addToCart(p: Prodotto){
     if(this.loggato){
-      //aggiungi al carrello che è nella sessione
+      console.log("prodotto", p);
+      this.home_service.addToCart(p.codice).subscribe(data =>{
+        console.log("add carrello", data)
+      });
     }
     else{
-      //redirect to login con alert dicendo che prima ti devi loggare
       alert("Ops! per aggiungere un prodtto al carrello devi accedere all'area personale.");
+      this.router.navigate(['login'])
     }
+  }
+
+  search(){
+    this.prodotti_filtrati = this.prodotti.filter(p =>
+      p.nome.trim().toLowerCase().includes(this.parola_chiave.toLowerCase())
+    )
   }
 
 }

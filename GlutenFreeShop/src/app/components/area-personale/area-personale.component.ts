@@ -1,5 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { Carrello } from 'src/app/models/Carrello';
 import { Utente } from 'src/app/models/Utente';
+import { HomeService } from 'src/app/services/home-service.service';
 import { UserService } from 'src/app/services/user-service.service';
 
 @Component({
@@ -30,12 +32,21 @@ export class AreaPersonaleComponent {
   sign_convenzionato: boolean=false;
   signin_ok: boolean = false;
 
-  constructor(private user_service: UserService) { }
 
-  ngOnInit() {}
+  preferiti=[];
+  // carrello:Carrello;
 
-  @Output() emitter : EventEmitter<boolean> = new EventEmitter();
+  constructor(private user_service: UserService, private home_service: HomeService) { }
 
+  ngOnInit() {
+    console.log("area-personale, utente:", sessionStorage.getItem("user_id"))
+    if(sessionStorage.getItem("user_id")==null){
+      this.loggato = false
+    }
+    else{
+      this.loggato = true
+    }
+  }
 
   login(){
     this.user_service.login(this.username, this.password).subscribe(
@@ -55,9 +66,6 @@ export class AreaPersonaleComponent {
 
           console.log("id", this.utente.id)
           sessionStorage.setItem("user_id", this.utente.id.toString());
-          //carrello?
-
-          this.emitter.emit(this.loggato); //TODO
         }
     });
   }
@@ -89,15 +97,21 @@ export class AreaPersonaleComponent {
   }
 
   showPreferiti(){
-    let data = this.utente.preferiti();
     console.log("utente", this.utente);
-    console.log("preferiti", data);
     console.log("user id nei preferiti", sessionStorage.getItem("user_id"));
 
-    this.dialog = true;
-    // this.user_service.getPreferiti(sessionStorage.getItem("user_id")).subscribe(data=>{
-      // console.log("preferiti", data)
-    // })
+    this.user_service.get(sessionStorage.getItem("user_id")).subscribe(data =>{
+      let u = JSON.stringify(data)
+      this.preferiti = JSON.parse(u).preferiti;
+      console.log("preferiti", JSON.parse(u).preferiti)
+      this.dialog = true;
+    })
+  }
+
+  showCarrello(){
+    this.home_service.getCarrello().subscribe( data =>{
+      console.log("carrello get", data);
+    });
   }
 
 }

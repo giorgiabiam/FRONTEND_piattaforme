@@ -1,22 +1,13 @@
-.content {
-  display: flex;
-  margin: 82px auto 32px;
-  padding: 0 16px;
-  max-width: 960px;
-  flex-direction: column;
-  align-items: center;
-}
-
-
 .toolbar {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 80px;
+  height: 100px;
+  width: 100%;
   display: flex;
   align-items: center;
-  background-color: #1976d2;
+  background-color: #2a537c;
   color: white;
 }
 
@@ -25,20 +16,25 @@
 }
 
 .nav-area-personale{
+  display: inline-block;
   margin: 3%;
+  padding: 3%;
 }
 
-.nav-search{
-  display: flex;
-  align-items: center;
-  background-image: linear-gradient(to right, yellow , #248ef7, rgb(0, 209, 7));
-  width: 800px;
-  border-radius: 25px;
+a{
+  color: aliceblue;
+}
+
+.logout-button{
   margin: 2%;
 }
 
-.icona-carrello{
-
+.content {
+  display: flex;
+  margin: 90px auto 30px;
+  padding: 0 16px;
+  max-width: 960px;
+  flex-direction: column;
+  align-items: center;
 }
-
 

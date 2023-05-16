@@ -22,6 +22,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatInputModule} from '@angular/material/input';
 import {MatBadgeModule} from '@angular/material/badge';
+import { AuthInterceptor } from './aut/AuthInterceptor';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatInputModule,
     MatBadgeModule
   ],
-  providers: [HomeService, UserService],
+  providers: [HomeService, UserService, AuthInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
