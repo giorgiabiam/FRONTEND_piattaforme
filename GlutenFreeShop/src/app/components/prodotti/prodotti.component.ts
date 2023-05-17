@@ -66,7 +66,9 @@ export class ProdottiComponent {
 
   search(){
     this.prodotti_filtrati = this.prodotti.filter(p =>
-      p.nome.trim().toLowerCase().includes(this.parola_chiave.toLowerCase())
+      p.descrizione.trim().toLowerCase().includes(this.parola_chiave.toLowerCase())
+      //TODO deve cercare anche nel nome
+      // p.nome.trim().toLowerCase().includes(this.parola_chiave.toLowerCase())
     )
   }
 

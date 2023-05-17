@@ -24,6 +24,10 @@
   padding-left: 2px;
 }
 
+.quantity_input:focus-visible {
+  outline: -webkit-focus-ring-color auto 0px;
+}
+
 button{
   width: 100%;
   height: 50px;

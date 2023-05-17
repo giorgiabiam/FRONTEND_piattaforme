@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { Carrello } from 'src/app/models/Carrello';
 import { Utente } from 'src/app/models/Utente';
 import { HomeService } from 'src/app/services/home-service.service';
@@ -36,7 +37,7 @@ export class AreaPersonaleComponent {
   preferiti=[];
   // carrello:Carrello;
 
-  constructor(private user_service: UserService, private home_service: HomeService) { }
+  constructor(private user_service: UserService, private home_service: HomeService, private router:Router) { }
 
   ngOnInit() {
     console.log("area-personale, utente:", sessionStorage.getItem("user_id"))
@@ -49,24 +50,35 @@ export class AreaPersonaleComponent {
   }
 
   login(){
-    this.user_service.login(this.username, this.password).subscribe(
-      data =>{
-        console.log("LOGIN----", data)
+    this.user_service.login(this.username, this.password).subscribe({
+      next:data =>{        //login andato a buon fine
 
-        if(data==null){
-          this.login_ok = false;
-          this.loggato = false;
-        }
-        else{
-          //login andato a buon fine
-          this.login_ok = true;
-          this.loggato = true;
+        console.log("LOGIN----", data)  //data nel back è di tipo JwtResponse che ha (String jwt, Utente u)
+        this.login_ok = true;
+        this.loggato = true;
 
-          this.utente = JSON.parse(JSON.stringify(data));
+        let response = JSON.parse(JSON.stringify(data));  //DA VERIFICARE
+        console.log("RESPONSE", response)
+        this.utente = response.utente
+        const jwt = response.token
 
-          console.log("id", this.utente.id)
-          sessionStorage.setItem("user_id", this.utente.id.toString());
-        }
+        console.log("id utente", this.utente.id)
+        console.log("token", jwt)
+
+        sessionStorage.setItem("user_id", this.utente.id.toString());
+        sessionStorage.setItem("token", jwt);
+
+      //reload page ?
+      // window.location.reload();
+
+      },
+      error:err =>{
+        this.login_ok = false;
+        this.loggato = false;
+        console.log("error", err);
+
+        //TODO comunca error message
+      }
     });
   }
 
@@ -94,6 +106,7 @@ export class AreaPersonaleComponent {
   logout(){
     sessionStorage.clear();
     window.location.reload(); //TODO redirect a home
+    this.router.navigate(['login'])
   }
 
   showPreferiti(){

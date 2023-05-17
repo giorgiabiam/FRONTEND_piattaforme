@@ -17,11 +17,11 @@ export class UserService {
   constructor(private http: HttpClient){}
 
   public login(username: String, password: String){
-    return this.http.post("https://localhost:8443/utenti/login", {username, password}, httpOptions);
+    return this.http.post("https://localhost:8443/utenti/auth/login", {username, password}, httpOptions);
   }
 
   public signin(nuovoUtente: Utente){
-    return this.http.post("https://localhost:8443/utenti/", nuovoUtente, httpOptions);
+    return this.http.post("https://localhost:8443/utenti/auth/register", nuovoUtente, httpOptions);
   }
 
   //id_utente deve essere string non any
