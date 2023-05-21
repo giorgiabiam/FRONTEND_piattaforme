@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeService } from 'src/app/services/home-service.service';
 
 @Component({
   selector: 'app-home',
@@ -12,10 +13,9 @@ export class HomeComponent implements OnInit{
   parola_chiave:String = "";
   logout_alert=false;
 
-  ngOnInit(): void {
-    console.log("home, utente:", sessionStorage.getItem("user_id"))
-    console.log("home, loggato?", this.loggato)
+  constructor(private home_service:HomeService){}
 
+  ngOnInit(): void {
     let el = document.getElementById("logout_button")
 
     if(sessionStorage.getItem("user_id")==null){
@@ -26,6 +26,10 @@ export class HomeComponent implements OnInit{
       this.loggato = true
       el?.setAttribute("hidden", "hidden")
     }
+
+    console.log("home -> utente:", sessionStorage.getItem("user_id"))
+    console.log("home -> token:", sessionStorage.getItem("token"))
+    console.log("home -> loggato?", this.loggato)
   }
 
   logout(){
@@ -33,6 +37,9 @@ export class HomeComponent implements OnInit{
     alert("sei sicuro di voler uscire?   TODO")
     sessionStorage.clear();
     window.location.reload();
+    this.home_service.svuota_carrello().subscribe(data=>{
+      console.log("carrello al logout", data)
+    })
   }
 
   comunicazione(event: any){

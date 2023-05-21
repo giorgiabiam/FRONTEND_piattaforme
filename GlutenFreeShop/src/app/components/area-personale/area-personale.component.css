@@ -11,7 +11,6 @@
 .card{
   display: grid;
   grid-template-columns: 400px;
-  grid-template-rows: 50px 50px 1fr 1fr 1fr;
   gap: 1px 0px;
   grid-template-areas:
     "."
@@ -28,6 +27,16 @@ mat-form-field{
 }
 
 .preferiti{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 1fr;
+  gap: 1px 0px;
+  justify-items: center;
+  margin: 5%;
+}
+
+
+.acquisti{
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 50px 1fr;

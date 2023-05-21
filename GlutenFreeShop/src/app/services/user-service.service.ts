@@ -29,11 +29,12 @@ export class UserService {
     return this.http.post("https://localhost:8443/utenti/"+id_utente , {prodotto}, httpOptions);
   }
 
-  get(id_utente: any){
+  getById(id_utente: any){
     return this.http.get("https://localhost:8443/utenti/"+id_utente, httpOptions);
   }
 
   acquista(id_utente: any, carrello:Carrello){
+    console.log("carrello da acquistare", carrello)
     return this.http.post("https://localhost:8443/acquisti/"+id_utente, carrello, httpOptions);
   }
 }

@@ -6,6 +6,7 @@ export class Utente{
   cognome: String;
   indirizzo: String;
   convenzionato: boolean;
+  saldo:number = 0;
 
   constructor(username: String, password:String, nome:String, cognome:String, indirizzo:String,
     convenzionato: boolean){
@@ -16,5 +17,8 @@ export class Utente{
       this.indirizzo=indirizzo;
       this.convenzionato=convenzionato;
        //il saldo è gestito nel backend
+       if(convenzionato){
+        this.saldo = 90
+       }
   }
 }

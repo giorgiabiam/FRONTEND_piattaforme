@@ -2,12 +2,13 @@
 
   <div *ngIf="loggato">
     <div class="card">
-      <h2>  Ciao {{utente.nome}} ! </h2>
+      <h2>  Ciao {{utente.nome}}! </h2>
+      <!-- <h3>  Ti rimangono {{utente.saldo}}€ dal tuo buono celiachia </h3> -->
       <button mat-button color="primary" (click)="showPreferiti()"><mat-icon>favorite</mat-icon>Visualizza preferiti</button>
       <button mat-button color="primary" (click)="showCarrello()"><mat-icon>shopping_cart</mat-icon>
-         Visualizza carrello <!--<a href="/carrello"></a> -->
+         Visualizza carrello
       </button>
-      <button mat-button color="primary"><mat-icon>edit</mat-icon>Modifica profilo</button>
+      <button mat-button color="primary" (click)="showAcquisti()"><mat-icon>list</mat-icon>Visualizza lista acquisti</button>
       <br>
       <button mat-raised-button color="primary" (click)="logout()">Logout</button>
     </div>
@@ -16,7 +17,6 @@
    <form *ngIf="!nuovoUtente && !loggato">
     <div class="card">
       <h2>LOGIN</h2>
-      <!-- <span *ngIf="!login_ok" style="color: red;">ERRORE LOGIN</span> -->
       <mat-form-field appearance="outline">
         <label>username</label>
         <input matInput [(ngModel)]="username" required>
@@ -39,13 +39,9 @@
   <form *ngIf="nuovoUtente && !loggato" >
     <div class="card">
       <h2>REGISTRATI</h2>
-      <!-- <span *ngIf="!signin_ok" style="color: red;">ERRORE REGISTRAZIONE</span> -->
       <mat-form-field appearance="outline">
         <label>username</label>
         <input matInput [(ngModel)]="sign_username" required>
-        <!-- TODO -->
-        <!-- <span *ngIf="!sign_username" style="color: red;">username field cannot be empty</span> -->
-        <!--   -->
       </mat-form-field>
       <mat-form-field appearance="outline">
         <label>password</label>
@@ -79,12 +75,20 @@
     </div>
   </form>
 
-  <div *ngIf="dialog" class="preferiti">
-    <button mat-button (click)="dialog=false">
+  <div *ngIf="dialogPref" class="preferiti">
+    <button mat-button (click)="dialogPref=false">
       <mat-icon>close</mat-icon>
     </button>
     <h2>Prodotti che hai aggiunto ai preferiti</h2>
     {{preferiti}}
+  </div>
+
+  <div *ngIf="dialogAcq" class="lista-acquisti">
+    <button mat-button (click)="dialogAcq=false">
+      <mat-icon>close</mat-icon>
+    </button>
+    <h2>Lista acquisti effettuati</h2>
+    {{acquisti}}
   </div>
 
   </div>

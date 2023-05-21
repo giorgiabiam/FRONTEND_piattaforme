@@ -1,21 +1,20 @@
 <div class="container">
-  <div>
-    {{carrello}}
+  <div *ngIf="vuoto">
+    <h2 >Il tuo carrello è vuoto!</h2>
+    <h3>per aggiungere prodotti al tuo carrello ritorna alla <a href="/">home page</a></h3>
+  </div>
+  <div *ngIf="!vuoto">
     <ul>
-      //TODO
-      <li *ngFor="let p of carrello.lista_prodotti">
+      <li *ngFor="let p of carrello.listaProdotti">
         <div>
           <img [src]="p.img" alt="product image">
           {{p.nome}}  quantità e prezzo singolo
         </div>
       </li>
     </ul>
-    <h2>Toale: {{totale}} €</h2>
-
+     <h2>Toale: {{totale}} €</h2> <!-- TODO align a destra -->
     <h2 style="color: red;">ricordati di chiedere al checkout se vuole usare il buono celiachia per il pagamento</h2>
+    <button mat-raised-button color="primary" (click)="procedi()">Procedi all'ordine</button>
   </div>
-
   <div>
-    <button mat-button (click)="procedi()">Procedi all'ordine</button>
-  </div>
 </div>

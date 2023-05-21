@@ -21,7 +21,7 @@ export class ProdottiComponent {
 
   ngOnInit() {
 
-    console.log("prodotti-component, utente:", sessionStorage.getItem("user_id"))
+    console.log("prodotti-component -> utente:", sessionStorage.getItem("user_id"))
     if(sessionStorage.getItem("user_id")==null){
       this.loggato = false
     }
@@ -54,8 +54,9 @@ export class ProdottiComponent {
   addToCart(p: Prodotto){
     if(this.loggato){
       console.log("prodotto", p);
+      console.log("codice prodotto", p.codice);
       this.home_service.addToCart(p.codice).subscribe(data =>{
-        console.log("add carrello", data)
+        console.log("ADD -- carrello", data)
       });
     }
     else{

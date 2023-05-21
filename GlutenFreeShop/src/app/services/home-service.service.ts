@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Prodotto } from '../models/Prodotto';
+import { Carrello } from '../models/Carrello';
 
 const httpOptions={
   headers: new HttpHeaders({})
@@ -14,15 +15,19 @@ export class HomeService {
   constructor(private http: HttpClient) {}
 
   getAllProdotti() {
-    return this.http.get<Prodotto[]>("https://localhost:8443/prodotti/", httpOptions);
+    return this.http.get<Prodotto[]>("https://localhost:8443/prodotti", httpOptions);
   }
 
-  addToCart(codice_prodotto : number){
-    return this.http.post("https://localhost:8443/carrello", codice_prodotto, httpOptions);
+  addToCart(codice_prodotto : number){  //TODO quantità
+    return this.http.post("https://localhost:8443/carrello", {codice_prodotto, qta:1}, httpOptions);
   }
 
   getCarrello(){
     return this.http.get("https://localhost:8443/carrello", httpOptions);
+  }
+
+  svuota_carrello(){
+    return this.http.delete("https://localhost:8443/carrello", httpOptions)
   }
 
 }

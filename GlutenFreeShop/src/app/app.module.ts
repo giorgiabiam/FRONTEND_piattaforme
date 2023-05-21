@@ -13,6 +13,7 @@ import { AreaPersonaleComponent } from './components/area-personale/area-persona
 
 import { HomeService } from './services/home-service.service';
 import { UserService } from './services/user-service.service';
+import { AuthInterceptor } from './_helpers/AuthInterceptor';
 
 // Angular Material
 import {MatButtonModule} from '@angular/material/button';
@@ -22,7 +23,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatInputModule} from '@angular/material/input';
 import {MatBadgeModule} from '@angular/material/badge';
-import { AuthInterceptor } from './aut/AuthInterceptor';
 
 @NgModule({
   declarations: [

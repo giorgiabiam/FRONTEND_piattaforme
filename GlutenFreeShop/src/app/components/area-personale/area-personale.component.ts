@@ -11,18 +11,16 @@ import { UserService } from 'src/app/services/user-service.service';
   styleUrls: ['./area-personale.component.css']
 })
 export class AreaPersonaleComponent {
-
-  utente : any;
-
+  utente!: Utente;
   username:String='';
   password:String='';
   login_ok: boolean = false;
 
-
   nuovoUtente: boolean=true;
   hide: boolean= true;
   loggato : boolean = false;   //questo lo dovrei mandare al parent
-  dialog : boolean = false;
+  dialogPref : boolean = false;
+  dialogAcq : boolean = false
 
 
   sign_username:String='';
@@ -35,18 +33,23 @@ export class AreaPersonaleComponent {
 
 
   preferiti=[];
+  acquisti=[];
   // carrello:Carrello;
 
   constructor(private user_service: UserService, private home_service: HomeService, private router:Router) { }
 
   ngOnInit() {
-    console.log("area-personale, utente:", sessionStorage.getItem("user_id"))
+    console.log("area-personale -> utente:", sessionStorage.getItem("user_id"))
+    console.log("area-personale -> token:", sessionStorage.getItem("token"))
+
     if(sessionStorage.getItem("user_id")==null){
       this.loggato = false
     }
     else{
       this.loggato = true
+      this.getUser();
     }
+    //TODO get utente by id così mi slavo solo l'id nella sessione
   }
 
   login(){
@@ -56,22 +59,18 @@ export class AreaPersonaleComponent {
         console.log("LOGIN----", data)  //data nel back è di tipo JwtResponse che ha (String jwt, Utente u)
         this.login_ok = true;
         this.loggato = true;
-
         let response = JSON.parse(JSON.stringify(data));  //DA VERIFICARE
-        console.log("RESPONSE", response)
-        this.utente = response.utente
         const jwt = response.token
 
-        console.log("id utente", this.utente.id)
-        console.log("token", jwt)
+        console.log("response", response)
 
-        sessionStorage.setItem("user_id", this.utente.id.toString());
+        sessionStorage.setItem("user_id", response.utente.id.toString());
         sessionStorage.setItem("token", jwt);
 
-      //reload page ?
-      // window.location.reload();
+        this.getUser();
 
       },
+
       error:err =>{
         this.login_ok = false;
         this.loggato = false;
@@ -80,6 +79,14 @@ export class AreaPersonaleComponent {
         //TODO comunca error message
       }
     });
+  }
+
+  getUser(){
+    let id = sessionStorage.getItem("user_id")
+    this.user_service.getById(id).subscribe(data=>{
+      console.log("GET USER", data)
+      this.utente = JSON.parse(JSON.stringify(data));
+    })
   }
 
   signin(){
@@ -97,34 +104,45 @@ export class AreaPersonaleComponent {
             this.signin_ok = true;
             this.loggato = true;
 
-            this.utente = JSON.parse(JSON.stringify(data));
-            sessionStorage.setItem("user_id", this.utente.id);
+            let response = JSON.parse(JSON.stringify(data));
+            sessionStorage.setItem("user_id", response.utente.id);
           }
         });
   }
 
   logout(){
     sessionStorage.clear();
-    window.location.reload(); //TODO redirect a home
-    this.router.navigate(['login'])
+    window.location.reload();
+    this.router.navigate(['login'])  //TODO redirect a home
+    this.home_service.svuota_carrello().subscribe(data=>{
+      console.log("carrello al logout", data)
+    })
   }
 
   showPreferiti(){
-    console.log("utente", this.utente);
     console.log("user id nei preferiti", sessionStorage.getItem("user_id"));
 
-    this.user_service.get(sessionStorage.getItem("user_id")).subscribe(data =>{
+    this.user_service.getById(sessionStorage.getItem("user_id")).subscribe(data =>{
       let u = JSON.stringify(data)
       this.preferiti = JSON.parse(u).preferiti;
       console.log("preferiti", JSON.parse(u).preferiti)
-      this.dialog = true;
+      this.dialogPref = true;
     })
   }
 
   showCarrello(){
-    this.home_service.getCarrello().subscribe( data =>{
-      console.log("carrello get", data);
-    });
+    this.router.navigate(['carrello'])
+  }
+
+  showAcquisti(){
+    console.log("user id in mostra acquisti", sessionStorage.getItem("user_id"));
+
+    this.user_service.getById(sessionStorage.getItem("user_id")).subscribe(data =>{
+      let u = JSON.stringify(data)
+      this.acquisti = JSON.parse(u).listaAcquisti;
+      console.log("lista acquisti", JSON.parse(u).listaAcquisti)
+      this.dialogAcq = true;
+    })
   }
 
 }
