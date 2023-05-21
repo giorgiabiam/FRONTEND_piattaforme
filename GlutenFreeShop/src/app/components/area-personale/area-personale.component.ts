@@ -56,15 +56,14 @@ export class AreaPersonaleComponent {
     this.user_service.login(this.username, this.password).subscribe({
       next:data =>{        //login andato a buon fine
 
-        console.log("LOGIN----", data)  //data nel back è di tipo JwtResponse che ha (String jwt, Utente u)
+        console.log("LOGIN----", data)  //data nel back è di tipo JwtResponse che ha (String jwt, int idUtente)
         this.login_ok = true;
         this.loggato = true;
-        let response = JSON.parse(JSON.stringify(data));  //DA VERIFICARE
+        let response = JSON.parse(JSON.stringify(data));
         const jwt = response.token
+        const idutente = response.idutente
 
-        console.log("response", response)
-
-        sessionStorage.setItem("user_id", response.utente.id.toString());
+        sessionStorage.setItem("user_id", idutente);
         sessionStorage.setItem("token", jwt);
 
         this.getUser();

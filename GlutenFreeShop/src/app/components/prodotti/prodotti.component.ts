@@ -54,7 +54,6 @@ export class ProdottiComponent {
   addToCart(p: Prodotto){
     if(this.loggato){
       console.log("prodotto", p);
-      console.log("codice prodotto", p.codice);
       this.home_service.addToCart(p.codice).subscribe(data =>{
         console.log("ADD -- carrello", data)
       });

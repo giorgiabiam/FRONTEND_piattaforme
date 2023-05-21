@@ -10,12 +10,9 @@ import { UserService } from 'src/app/services/user-service.service';
 })
 export class CarrelloComponent implements OnInit {
   carrello!: Carrello;
-  totale: number;
   vuoto:boolean = true;
 
-  constructor(private user_service : UserService, private home_service : HomeService){
-    this.totale = 0;
-  }
+  constructor(private user_service : UserService, private home_service : HomeService){ }
 
   ngOnInit(): void {
     let id_utente = sessionStorage.getItem("user_id")
@@ -30,32 +27,30 @@ export class CarrelloComponent implements OnInit {
     this.home_service.getCarrello().subscribe(data=>{
 
       this.carrello = JSON.parse(JSON.stringify(data))
-      console.log("carrello", this.carrello)
-      console.log("lista prodotti", this.carrello.listaProdotti)
-      console.log("tot", this.totale)
 
-      if(this.carrello.listaProdotti.length == 0){
+      if(this.carrello.listaProdottiReal.length == 0){
         this.vuoto = true
       }
-      else this.vuoto = false
+      else{
+        this.vuoto = false
+      }
     })
 
     console.log("carrello -> user id:", sessionStorage.getItem("user_id"))
     console.log("carrello -> token:", sessionStorage.getItem("token"))
-
   }
 
   procedi(){
     let id_utente = sessionStorage.getItem("user_id")
-    this.user_service.getById(id_utente).subscribe(data=>{
+    // this.user_service.getById(id_utente).subscribe(data=>{
       // let utente:Utente = data
       // if(utente.convenzionato){
       //   alert("Vuoi usare il buono celiachia?") //TODO
       // }
-    })
+    // })
 
     this.user_service.acquista(id_utente, this.carrello).subscribe( data=>{
-      console.log("acquisto", data)
+      console.log("dati acquisto", data)
     })
 
   }
