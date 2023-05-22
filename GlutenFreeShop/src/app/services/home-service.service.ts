@@ -30,4 +30,8 @@ export class HomeService {
     return this.http.delete("https://localhost:8443/carrello", httpOptions)
   }
 
+  removeFromCart(id_prodotto:number){
+    return this.http.delete("https://localhost:8443/carrello/"+id_prodotto, httpOptions)
+  }
+
 }

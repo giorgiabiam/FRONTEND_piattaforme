@@ -37,12 +37,6 @@ export class UserService {
 
   acquista(id_utente: any, carrello:Carrello){
     console.log("carrello da acquistare", carrello)
-    let token = sessionStorage.getItem("token")
     return this.http.post("https://localhost:8443/acquisti/"+id_utente, carrello, httpOptions)
-
-    // {headers: new HttpHeaders({
-    //     Authorization: `Bearer ${token}`
-    //   })}
-    //   );
   }
 }

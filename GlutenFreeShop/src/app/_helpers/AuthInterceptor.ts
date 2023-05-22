@@ -19,22 +19,7 @@ export class AuthInterceptor implements HttpInterceptor{
         Authorization: `Bearer ${token}`
       }
     });
-
     return next.handle(clonedReq);
-    // .pipe( err => {
-    //   if (err instanceof HttpErrorResponse && err.status === 401) { // 403 ?
-    //       this.handle401error(req, next, token);
-    //   }
-    //   return throwError(()=> err);
-    // });
-  }
-
-  private handle401error(req: HttpRequest<any>, next: HttpHandler, token:any){
-    if(token){   //TODO controllare il token
-      this.router.navigate(['login']);
-    }
-    this.router.navigate(['login']);
-    // return next.handle(req);
   }
 
 }
