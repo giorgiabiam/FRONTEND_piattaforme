@@ -3,8 +3,6 @@
   <div *ngIf="loggato">
     <div class="card">
       <h2>  Ciao {{utente.nome}}! </h2>
-      <!-- <h3>  Ti rimangono {{utente.saldo}}€ dal tuo buono celiachia </h3> -->
-      <button mat-button color="primary" (click)="showPreferiti()"><mat-icon>favorite</mat-icon>Visualizza preferiti</button>
       <button mat-button color="primary" (click)="showCarrello()"><mat-icon>shopping_cart</mat-icon>
          Visualizza carrello
       </button>
@@ -74,14 +72,6 @@
       </span>
     </div>
   </form>
-
-  <div *ngIf="dialogPref" class="preferiti">
-    <button mat-button (click)="dialogPref=false">
-      <mat-icon>close</mat-icon>
-    </button>
-    <h2>Prodotti che hai aggiunto ai preferiti</h2>
-    {{preferiti}}
-  </div>
 
   <div *ngIf="dialogAcq" class="lista-acquisti">
     <button mat-button (click)="dialogAcq=false">

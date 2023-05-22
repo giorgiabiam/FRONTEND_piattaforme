@@ -24,6 +24,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatInputModule} from '@angular/material/input';
 import {MatBadgeModule} from '@angular/material/badge';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +45,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatRadioModule,
     MatInputModule,
     MatBadgeModule
+
   ],
   providers: [HomeService, UserService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

@@ -3,7 +3,6 @@
 <div class="nav-search">
   <input type="text" matInput placeholder="Cerca prodotti" class="search"
     [(ngModel)]="parola_chiave" (input)="search()">
-    <!-- <mat-icon>search</mat-icon> -->
 </div>
 
 <div class="card-container">
@@ -20,10 +19,7 @@
         <br><br>
       </mat-card-content>
       <mat-card-actions>
-        <!-- se un prodotto sta nei preferiti dell'utente loggato l'icona deve essere
-          un cuore pieno  <mat-icon>favorite</mat-icon> e c'è scritto rimuovi ai preferiti -->
-        <button (click)="addToFav(p)"><mat-icon>favorite_border</mat-icon>Aggiungi ai preferiti</button>
-        <button (click)="addToCart(p)"><mat-icon>shopping_cart</mat-icon>Aggiungi al carrello</button>
+        <button mat-raised-button (click)="addToCart(p)" class="button"><mat-icon>shopping_cart</mat-icon>Aggiungi al carrello</button>
         <input type="number" value="1" class="quantity_input" min="1" [max]="p.qta">
       </mat-card-actions>
     </mat-card>

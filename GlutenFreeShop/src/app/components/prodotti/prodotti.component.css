@@ -46,7 +46,19 @@ button{
 
 .search{
   width: 90%;
+  height: 30px;
+  border: 0;
   border-radius: 15px;
   margin-left: 3px;
+  background-color: rgb(213, 213, 213);
+}
+
+.button{
+  width: 50%;
+  border-radius: 15px;
+}
+
+.button:hover{
+  background-color:#2c5e90b8;
 }
 

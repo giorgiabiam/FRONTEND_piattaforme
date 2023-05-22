@@ -26,16 +26,6 @@ mat-form-field{
   width: 95%;
 }
 
-.preferiti{
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 50px 1fr;
-  gap: 1px 0px;
-  justify-items: center;
-  margin: 5%;
-}
-
-
 .acquisti{
   display: grid;
   grid-template-columns: 1fr;

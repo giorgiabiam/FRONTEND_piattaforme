@@ -31,8 +31,6 @@ export class AreaPersonaleComponent {
   sign_convenzionato: boolean=false;
   signin_ok: boolean = false;
 
-
-  preferiti=[];
   acquisti=[];
   // carrello:Carrello;
 
@@ -115,17 +113,6 @@ export class AreaPersonaleComponent {
     this.router.navigate(['login'])  //TODO redirect a home
     this.home_service.svuota_carrello().subscribe(data=>{
       console.log("carrello al logout", data)
-    })
-  }
-
-  showPreferiti(){
-    console.log("user id nei preferiti", sessionStorage.getItem("user_id"));
-
-    this.user_service.getById(sessionStorage.getItem("user_id")).subscribe(data =>{
-      let u = JSON.stringify(data)
-      this.preferiti = JSON.parse(u).preferiti;
-      console.log("preferiti", JSON.parse(u).preferiti)
-      this.dialogPref = true;
     })
   }
 

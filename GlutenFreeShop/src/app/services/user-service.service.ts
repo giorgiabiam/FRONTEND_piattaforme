@@ -26,11 +26,6 @@ export class UserService {
     return this.http.post("https://localhost:8443/utenti/auth/register", nuovoUtente, httpOptions);
   }
 
-  //id_utente deve essere string non any
-  addToFavorites(id_utente: any, prodotto: Prodotto){
-    return this.http.post("https://localhost:8443/utenti/"+id_utente , {prodotto}, httpOptions);
-  }
-
   getById(id_utente: any){
     return this.http.get("https://localhost:8443/utenti/"+id_utente, httpOptions);
   }

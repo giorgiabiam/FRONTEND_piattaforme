@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Carrello } from 'src/app/models/Carrello';
 import { Prodotto } from 'src/app/models/Prodotto';
 import { HomeService } from 'src/app/services/home-service.service';
@@ -14,7 +15,7 @@ export class CarrelloComponent implements OnInit {
   vuoto:boolean = true;
   ok_acquisto:boolean = false
 
-  constructor(private user_service : UserService, private home_service : HomeService){ }
+  constructor(private user_service : UserService, private home_service : HomeService, private router:Router){ }
 
   ngOnInit(): void {
     let id_utente = sessionStorage.getItem("user_id")
@@ -55,6 +56,10 @@ export class CarrelloComponent implements OnInit {
 
   procedi(){
     let id_utente = sessionStorage.getItem("user_id")
+    if(id_utente==null){
+      this.router.navigate(['login'])
+    }
+
 
     this.user_service.acquista(id_utente, this.carrello).subscribe( data=>{
       console.log("dati acquisto andato a buon fine ", data)
