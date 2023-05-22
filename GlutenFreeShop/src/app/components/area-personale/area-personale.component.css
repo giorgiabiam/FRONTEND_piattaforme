@@ -12,12 +12,6 @@
   display: grid;
   grid-template-columns: 400px;
   gap: 1px 0px;
-  grid-template-areas:
-    "."
-    "."
-    "."
-    "."
-    ".";
   justify-items: center;
   border: solid 1px cadetblue;
 }
@@ -26,12 +20,25 @@ mat-form-field{
   width: 95%;
 }
 
-.acquisti{
+.lista-acquisti-container{
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 50px 1fr;
   gap: 1px 0px;
   justify-items: center;
   margin: 5%;
+}
+
+.card-acquisto{
+  display: flex;
+  flex-direction: column;
+  margin: 2%;
+  padding: 2%;
+  gap: 1px 0px;
+  width: 100%;
+  border: solid 0.5px #c2bebe;
+  justify-items: center;
+  font-size: 19px;
+  font-weight: 400;
 }
 

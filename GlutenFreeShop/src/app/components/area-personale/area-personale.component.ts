@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { Carrello } from 'src/app/models/Carrello';
+import { Acquisto } from 'src/app/models/Acquisto';
 import { Utente } from 'src/app/models/Utente';
 import { HomeService } from 'src/app/services/home-service.service';
 import { UserService } from 'src/app/services/user-service.service';
@@ -14,14 +14,13 @@ export class AreaPersonaleComponent {
   utente!: Utente;
   username:String='';
   password:String='';
-  login_ok: boolean = false;
+  acquisti:Acquisto[];
 
+  login_ok: boolean = false;
   nuovoUtente: boolean=true;
   hide: boolean= true;
   loggato : boolean = false;   //questo lo dovrei mandare al parent
-  dialogPref : boolean = false;
-  dialogAcq : boolean = false
-
+  dialog : boolean = false
 
   sign_username:String='';
   sign_password:String='';
@@ -31,10 +30,9 @@ export class AreaPersonaleComponent {
   sign_convenzionato: boolean=false;
   signin_ok: boolean = false;
 
-  acquisti=[];
-  // carrello:Carrello;
-
-  constructor(private user_service: UserService, private home_service: HomeService, private router:Router) { }
+  constructor(private user_service: UserService, private home_service: HomeService, private router:Router) {
+    this.acquisti = []
+  }
 
   ngOnInit() {
     console.log("area-personale -> utente:", sessionStorage.getItem("user_id"))
@@ -47,12 +45,11 @@ export class AreaPersonaleComponent {
       this.loggato = true
       this.getUser();
     }
-    //TODO get utente by id così mi slavo solo l'id nella sessione
   }
 
   login(){
     this.user_service.login(this.username, this.password).subscribe({
-      next:data =>{        //login andato a buon fine
+      next:data =>{ //login andato a buon fine
 
         console.log("LOGIN----", data)  //data nel back è di tipo JwtResponse che ha (String jwt, int idUtente)
         this.login_ok = true;
@@ -65,7 +62,6 @@ export class AreaPersonaleComponent {
         sessionStorage.setItem("token", jwt);
 
         this.getUser();
-
       },
 
       error:err =>{
@@ -73,7 +69,7 @@ export class AreaPersonaleComponent {
         this.loggato = false;
         console.log("error", err);
 
-        //TODO comunca error message
+        //TODO comunca error message visivamente
       }
     });
   }
@@ -83,6 +79,20 @@ export class AreaPersonaleComponent {
     this.user_service.getById(id).subscribe(data=>{
       console.log("GET USER", data)
       this.utente = JSON.parse(JSON.stringify(data));
+
+      this.user_service.getAcquisti(id).subscribe(data=>{
+        console.log("acquisti dell'utente ",id, ": ", data)
+        let lista:Acquisto[] = []
+
+        for(let a of JSON.parse(JSON.stringify(data))){
+          console.log("A: ", a)
+          let acquisto:Acquisto = new Acquisto(a.dataAcquisto, a.listaProdotti, a.tot)
+          lista.push(acquisto)
+        }
+        this.acquisti = lista
+        console.log("this acquisti ", this.acquisti)
+      });
+
     })
   }
 
@@ -121,14 +131,8 @@ export class AreaPersonaleComponent {
   }
 
   showAcquisti(){
-    console.log("user id in mostra acquisti", sessionStorage.getItem("user_id"));
-
-    this.user_service.getById(sessionStorage.getItem("user_id")).subscribe(data =>{
-      let u = JSON.stringify(data)
-      this.acquisti = JSON.parse(u).listaAcquisti;
-      console.log("lista acquisti", JSON.parse(u).listaAcquisti)
-      this.dialogAcq = true;
-    })
+    // this.getUser();
+    this.dialog = true;
   }
 
 }

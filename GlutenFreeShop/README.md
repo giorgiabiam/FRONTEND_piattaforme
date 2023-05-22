@@ -12,6 +12,8 @@ TODO
 9) rivedere i modelli 
 10) aggiorna pagina del carrello se l'acquisto va a buon fine
 11) carrello.http fa schifo metti le card di AM
+12) controlla signin se funziona
+13) SE IL TOKEN SCADE ?????
 
 
 https://github.com/bezkoder/angular-14-refresh-token/blob/master/src/app/_helpers/http.interceptor.ts

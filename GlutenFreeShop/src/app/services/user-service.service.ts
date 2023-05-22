@@ -34,4 +34,8 @@ export class UserService {
     console.log("carrello da acquistare", carrello)
     return this.http.post("https://localhost:8443/acquisti/"+id_utente, carrello, httpOptions)
   }
+
+  getAcquisti(id_utente:any){
+    return this.http.get("https://localhost:8443/acquisti/"+id_utente, httpOptions);
+  }
 }

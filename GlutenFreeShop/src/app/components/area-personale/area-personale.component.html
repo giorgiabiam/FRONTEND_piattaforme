@@ -73,12 +73,16 @@
     </div>
   </form>
 
-  <div *ngIf="dialogAcq" class="lista-acquisti">
-    <button mat-button (click)="dialogAcq=false">
+  <div *ngIf="dialog" class="lista-acquisti-container">
+    <button mat-button (click)="dialog=false">
       <mat-icon>close</mat-icon>
     </button>
     <h2>Lista acquisti effettuati</h2>
-    {{acquisti}}
+    <div *ngFor="let a of acquisti" class="card-acquisto">
+      <span>Data acquisto: {{a.dataAcquisto.substring(0,16)}}</span>
+      <span>Totale pagato: {{a.totale.toFixed(2)}}€</span>
+      <a style="font-size: 12px;" href="#">Dettagli ordine</a>
+    </div>
   </div>
 
   </div>
