@@ -11,32 +11,30 @@ export class AuthInterceptor implements HttpInterceptor{
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let token = sessionStorage.getItem("token")
-    console.log("token in interceptor", token)
+    console.log("token in interceptor: ", token)
 
-      let clonedReq = req.clone({   //clona sempre la richiesta prima di manipolarla
-        setHeaders: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      });
+    let clonedReq = req.clone({   //clona sempre la richiesta prima di manipolarla
+      setHeaders: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    });
 
-      return next.handle(clonedReq);
-      // .pipe( err => {
-      //   if (err instanceof HttpErrorResponse && err.status === 401) { // error 403 ?
-      //         this.handle401error(req, next, token);
-      //       }
-      //     return throwError(()=> err);
-      // });
+    return next.handle(clonedReq);
+    // .pipe( err => {
+    //   if (err instanceof HttpErrorResponse && err.status === 401) { // 403 ?
+    //       this.handle401error(req, next, token);
+    //   }
+    //   return throwError(()=> err);
+    // });
   }
 
   private handle401error(req: HttpRequest<any>, next: HttpHandler, token:any){
-    if(token){
-       //TODO controllare il token
-      // return next.handle(req);
+    if(token){   //TODO controllare il token
       this.router.navigate(['login']);
     }
-
     this.router.navigate(['login']);
+    // return next.handle(req);
   }
 
 }

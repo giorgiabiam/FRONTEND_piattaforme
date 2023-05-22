@@ -15,3 +15,6 @@ TODO
 
 
 https://github.com/bezkoder/angular-14-refresh-token/blob/master/src/app/_helpers/http.interceptor.ts
+
+utile per jwt:
+  https://dev-academy.com/how-to-use-angular-interceptors-to-manage-http-requests/

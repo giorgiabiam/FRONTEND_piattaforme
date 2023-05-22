@@ -42,6 +42,7 @@ export class CarrelloComponent implements OnInit {
 
   procedi(){
     let id_utente = sessionStorage.getItem("user_id")
+
     // this.user_service.getById(id_utente).subscribe(data=>{
       // let utente:Utente = data
       // if(utente.convenzionato){

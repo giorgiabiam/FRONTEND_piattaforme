@@ -6,7 +6,9 @@ import { Carrello } from '../models/Carrello';
 
 
 const httpOptions={
-  headers: new HttpHeaders({})
+  headers: new HttpHeaders({
+
+  })
 }
 
 @Injectable({
@@ -35,6 +37,12 @@ export class UserService {
 
   acquista(id_utente: any, carrello:Carrello){
     console.log("carrello da acquistare", carrello)
-    return this.http.post("https://localhost:8443/acquisti/"+id_utente, carrello, httpOptions);
+    let token = sessionStorage.getItem("token")
+    return this.http.post("https://localhost:8443/acquisti/"+id_utente, carrello, httpOptions)
+
+    // {headers: new HttpHeaders({
+    //     Authorization: `Bearer ${token}`
+    //   })}
+    //   );
   }
 }
