@@ -28,10 +28,11 @@ export class CarrelloComponent implements OnInit {
 
   loadCarrello() {
     this.home_service.getCarrello().subscribe(data=>{
-
       this.carrello = JSON.parse(JSON.stringify(data))
+      console.log("CARRELLO", this.carrello)
+      console.log("MAP", this.carrello.map)
 
-      if(this.carrello.listaProdottiReal.length == 0){
+      if(this.carrello.map.size == 0){
         this.vuoto = true
       }
       else{
@@ -46,7 +47,6 @@ export class CarrelloComponent implements OnInit {
   rimuovi_dal_carrello(p:Prodotto){
     console.log("tolgo dal carrello ", p)
     this.home_service.removeFromCart(p.codice).subscribe(data=>{
-      console.log("DATA", data)
       if(data==null){ //rimozione non è andata a buon fine
         console.log("errore rimozione")
       }
@@ -60,6 +60,12 @@ export class CarrelloComponent implements OnInit {
       this.router.navigate(['login'])
     }
 
+    //TODO se il carrello è vuoto non fare l'acquisto
+    if(this.carrello.map.size==0){
+      alert("non puoi acquistare un carrello vuoto!")
+      this.vuoto=true
+      return
+    }
 
     this.user_service.acquista(id_utente, this.carrello).subscribe( data=>{
       console.log("dati acquisto andato a buon fine ", data)
@@ -69,6 +75,11 @@ export class CarrelloComponent implements OnInit {
         this.vuoto = true
       });
     });
+  }
+
+  stampa_quantita(p:Prodotto){
+    let a =  this.carrello.map.get(p.codice)
+    console.log("quantità ", a)
   }
 
 }

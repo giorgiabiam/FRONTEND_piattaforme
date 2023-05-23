@@ -10,6 +10,7 @@
     <div *ngFor="let p of carrello.listaProdottiReal">
       <img [src]="p.img" alt="product image" style="max-width: 70px;">
       {{p.nome}} - {{p.prezzo}}€
+      <button (click)="stampa_quantita(p)">Stampa quantità</button>
       <button mat-icon-button (click)="rimuovi_dal_carrello(p)">
         <mat-icon>delete</mat-icon>
       </button>

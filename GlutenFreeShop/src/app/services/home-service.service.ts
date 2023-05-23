@@ -18,8 +18,8 @@ export class HomeService {
     return this.http.get<Prodotto[]>("https://localhost:8443/prodotti", httpOptions);
   }
 
-  addToCart(codice_prodotto : number){  //TODO quantità
-    return this.http.post("https://localhost:8443/carrello", {codice_prodotto, qta:1}, httpOptions);
+  addToCart(codice_prodotto : number, qta:number){  //TODO quantità
+    return this.http.post("https://localhost:8443/carrello", {codice_prodotto, qta}, httpOptions);
   }
 
   getCarrello(){

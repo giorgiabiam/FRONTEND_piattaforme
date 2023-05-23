@@ -16,6 +16,8 @@ export class ProdottiComponent {
   loggato : boolean = false;
   parola_chiave:string ="";
 
+  qta:number=1;
+
   constructor(private home_service: HomeService, private user_service: UserService,
             private router:Router) {}
 
@@ -37,16 +39,20 @@ export class ProdottiComponent {
   }
 
   addToCart(p: Prodotto){
+    console.log("quantità", this.qta);
+
     // if(this.loggato){
       console.log("prodotto", p);
-      this.home_service.addToCart(p.codice).subscribe(data =>{
+      this.home_service.addToCart(p.codice, this.qta).subscribe(data =>{
         console.log("ADD -- carrello", data)
+        this.qta=1
       });
     // }
     // else{
     //   alert("Ops! per aggiungere un prodtto al carrello devi accedere all'area personale.");
     //   this.router.navigate(['login'])
     // }
+
   }
 
   search(){
