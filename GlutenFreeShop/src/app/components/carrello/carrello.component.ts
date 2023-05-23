@@ -31,8 +31,9 @@ export class CarrelloComponent implements OnInit {
       this.carrello = JSON.parse(JSON.stringify(data))
       console.log("CARRELLO", this.carrello)
       console.log("MAP", this.carrello.map)
+      console.log("lista", this.carrello.listaProdottiReal)
 
-      if(this.carrello.map.size == 0){
+      if(this.carrello.totale == 0){
         this.vuoto = true
       }
       else{
@@ -61,7 +62,7 @@ export class CarrelloComponent implements OnInit {
     }
 
     //TODO se il carrello è vuoto non fare l'acquisto
-    if(this.carrello.map.size==0){
+    if(this.carrello.totale==0){
       alert("non puoi acquistare un carrello vuoto!")
       this.vuoto=true
       return

@@ -18,7 +18,7 @@ export class HomeService {
     return this.http.get<Prodotto[]>("https://localhost:8443/prodotti", httpOptions);
   }
 
-  addToCart(codice_prodotto : number, qta:number){  //TODO quantità
+  addToCart(codice_prodotto : number, qta:number){
     return this.http.post("https://localhost:8443/carrello", {codice_prodotto, qta}, httpOptions);
   }
 
@@ -32,6 +32,10 @@ export class HomeService {
 
   removeFromCart(id_prodotto:number){
     return this.http.delete("https://localhost:8443/carrello/"+id_prodotto, httpOptions)
+  }
+
+  getAcquistoById(id_acq:number){
+    return this.http.get("https://localhost:8443/acquisti/"+id_acq, httpOptions)
   }
 
 }

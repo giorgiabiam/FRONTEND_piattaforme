@@ -27,7 +27,6 @@ export class AreaPersonaleComponent {
   sign_firstname:String='';
   sign_lastname:String='';
   sign_address:String='';
-  sign_convenzionato: boolean=false;
   signin_ok: boolean = false;
 
   constructor(private user_service: UserService, private home_service: HomeService, private router:Router) {
@@ -86,7 +85,7 @@ export class AreaPersonaleComponent {
 
         for(let a of JSON.parse(JSON.stringify(data))){
           console.log("A: ", a)
-          let acquisto:Acquisto = new Acquisto(a.dataAcquisto, a.listaProdotti, a.tot)
+          let acquisto:Acquisto = new Acquisto(a.dataAcquisto, a.listaProdotti, a.tot, a.id)
           lista.push(acquisto)
         }
         this.acquisti = lista
@@ -98,7 +97,7 @@ export class AreaPersonaleComponent {
 
   signin(){
     let newUtente = new Utente( this.sign_username, this.sign_password, this.sign_firstname, this.sign_lastname,
-                            this.sign_address, this.sign_convenzionato);
+                            this.sign_address );
 
     this.user_service.signin(newUtente).subscribe(data=>{
           console.log("SIGNIN----", data)

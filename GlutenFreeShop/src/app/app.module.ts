@@ -23,6 +23,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatInputModule} from '@angular/material/input';
 import {MatBadgeModule} from '@angular/material/badge';
+import { DettagliOrdineComponent } from './components/dettagli-ordine/dettagli-ordine.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     HomeComponent,
     ProdottiComponent,
     CarrelloComponent,
-    AreaPersonaleComponent
+    AreaPersonaleComponent,
+    DettagliOrdineComponent
   ],
   imports: [
     HttpClientModule,

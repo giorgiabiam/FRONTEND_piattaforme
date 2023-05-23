@@ -1,13 +1,15 @@
 import { Prodotto } from "./Prodotto"
 
 export class Acquisto{
+  id:number
   dataAcquisto:String
   listaProdotti: Prodotto[]
-  totale:number
+  tot:number
 
-  constructor(dataAcquisto:String, listaProdotti: Prodotto[], totale:number){
+  constructor(dataAcquisto:String, listaProdotti: Prodotto[], tot:number, id:number){
     this.dataAcquisto=dataAcquisto
     this.listaProdotti=listaProdotti
-    this.totale = totale
+    this.tot = tot
+    this.id = id
   }
 }

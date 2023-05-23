@@ -36,6 +36,6 @@ export class UserService {
   }
 
   getAcquisti(id_utente:any){
-    return this.http.get("https://localhost:8443/acquisti/"+id_utente, httpOptions);
+    return this.http.get("https://localhost:8443/acquisti/utente/"+id_utente, httpOptions);
   }
 }

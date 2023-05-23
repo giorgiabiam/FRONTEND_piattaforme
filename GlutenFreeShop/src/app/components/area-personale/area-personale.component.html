@@ -60,11 +60,6 @@
         <label>address</label>
         <input matInput [(ngModel)]="sign_address" placeholder="Es: Via Aldo Moro, 24 Torano Castello" required>
       </mat-form-field>
-      <mat-radio-group [(ngModel)]="sign_convenzionato" required>
-        <h3 style="margin-left: 3%;">Sei possessore del buono celiachia mensile?</h3>
-        <mat-radio-button value="true">si</mat-radio-button>
-        <mat-radio-button value="false">no</mat-radio-button>
-      </mat-radio-group>
       <button mat-raised-button color="primary" (click)="signin()">Sign in</button>
       <br>
       <span>
@@ -78,10 +73,11 @@
       <mat-icon>close</mat-icon>
     </button>
     <h2>Lista acquisti effettuati</h2>
-    <div *ngFor="let a of acquisti" class="card-acquisto">
-      <span>Data acquisto: {{a.dataAcquisto.substring(0,16)}}</span>
-      <span>Totale pagato: {{a.totale.toFixed(2)}}€</span>
-      <a style="font-size: 12px;" href="#">Dettagli ordine</a>
+    <div *ngFor="let acq of acquisti" class="card-acquisto">
+      {{acq.id}}
+      <span>Data acquisto: {{acq.dataAcquisto.substring(0,16)}}</span>
+      <span>Totale pagato: {{acq.tot.toFixed(2)}}€</span>
+      <a style="font-size: 12px;" [routerLink]="['/dettagli', acq.id]">Dettagli ordine</a>
     </div>
   </div>
 

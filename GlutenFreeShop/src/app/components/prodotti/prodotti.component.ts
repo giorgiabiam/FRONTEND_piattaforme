@@ -40,25 +40,20 @@ export class ProdottiComponent {
 
   addToCart(p: Prodotto){
     console.log("quantità", this.qta);
+    console.log("prodotto", p);
 
-    // if(this.loggato){
-      console.log("prodotto", p);
-      this.home_service.addToCart(p.codice, this.qta).subscribe(data =>{
-        console.log("ADD -- carrello", data)
-        this.qta=1
-      });
-    // }
-    // else{
-    //   alert("Ops! per aggiungere un prodtto al carrello devi accedere all'area personale.");
-    //   this.router.navigate(['login'])
-    // }
-
+    this.home_service.addToCart(p.codice, this.qta).subscribe(data =>{
+      console.log("ADD -- carrello", data)
+      this.qta=1
+    });
   }
 
   search(){
     this.prodotti_filtrati = this.prodotti.filter(p =>
       p.descrizione.trim().toLowerCase().includes(this.parola_chiave.toLowerCase())
     )
+
+    this.prodotti_filtrati.sort((a, b)=> a.codice - b.codice)
   }
 
 }
