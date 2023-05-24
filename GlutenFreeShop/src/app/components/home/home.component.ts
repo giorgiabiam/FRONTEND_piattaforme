@@ -34,7 +34,6 @@ export class HomeComponent implements OnInit{
 
   logout(){
     console.log("logout per l'utente: ", sessionStorage.getItem("user_id"))
-    alert("sei sicuro di voler uscire?   TODO")
     sessionStorage.clear();
     window.location.reload();
     this.home_service.svuota_carrello().subscribe(data=>{

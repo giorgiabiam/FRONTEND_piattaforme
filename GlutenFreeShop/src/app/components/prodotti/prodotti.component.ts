@@ -15,8 +15,7 @@ export class ProdottiComponent {
 
   loggato : boolean = false;
   parola_chiave:string ="";
-
-  qta:number=1;
+  qta_acquistata:number = 1
 
   constructor(private home_service: HomeService, private user_service: UserService,
             private router:Router) {}
@@ -39,12 +38,12 @@ export class ProdottiComponent {
   }
 
   addToCart(p: Prodotto){
-    console.log("quantità", this.qta);
+    console.log("quantità", this.qta_acquistata);
     console.log("prodotto", p);
 
-    this.home_service.addToCart(p.codice, this.qta).subscribe(data =>{
+    this.home_service.addToCart(p.codice, this.qta_acquistata).subscribe(data =>{
       console.log("ADD -- carrello", data)
-      this.qta=1
+      this.qta_acquistata = 1
     });
   }
 

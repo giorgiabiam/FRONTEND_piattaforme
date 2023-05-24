@@ -1,5 +1,18 @@
 .container{
-  margin: 2%;
-  padding: 10%;
+  display: flex;
   justify-content: center;
+  margin: 82px auto 32px;
+  padding: 0 16px;
+  max-width: 960px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer{
+  display: flex;
+  flex-direction: row;
+  padding: 5%;
+  margin: 5%;
+  justify-content: baseline;
+  align-items: center;
 }

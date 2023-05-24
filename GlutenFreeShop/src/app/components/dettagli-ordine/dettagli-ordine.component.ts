@@ -18,12 +18,9 @@ export class DettagliOrdineComponent implements OnInit{
     this.route.params.subscribe(params=>{
       console.log( "id", params)
       this.home_service.getAcquistoById(params.id).subscribe(data=>{
-        console.log("ACQUISTO ", data)
-        this.acquisto = JSON.parse(JSON.stringify(data) )
+        this.acquisto.id = JSON.parse(JSON.stringify(data) )
+        console.log("ACQUISTO ", this.acquisto)
       });
     })
-
-
   }
-
 }

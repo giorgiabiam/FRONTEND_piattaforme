@@ -29,6 +29,7 @@ export class CarrelloComponent implements OnInit {
   loadCarrello() {
     this.home_service.getCarrello().subscribe(data=>{
       this.carrello = JSON.parse(JSON.stringify(data))
+
       console.log("CARRELLO", this.carrello)
       console.log("MAP", this.carrello.map)
       console.log("lista", this.carrello.listaProdottiReal)
@@ -51,7 +52,7 @@ export class CarrelloComponent implements OnInit {
       if(data==null){ //rimozione non è andata a buon fine
         console.log("errore rimozione")
       }
-      this.carrello = JSON.parse(JSON.stringify(data))
+      this.loadCarrello()
     });
   }
 
@@ -61,7 +62,7 @@ export class CarrelloComponent implements OnInit {
       this.router.navigate(['login'])
     }
 
-    //TODO se il carrello è vuoto non fare l'acquisto
+    // se il carrello è vuoto non deve fare l'acquisto
     if(this.carrello.totale==0){
       alert("non puoi acquistare un carrello vuoto!")
       this.vuoto=true
@@ -78,8 +79,17 @@ export class CarrelloComponent implements OnInit {
     });
   }
 
-  stampa_quantita(p:Prodotto){
-    let a =  this.carrello.map.get(p.codice)
+  svuota_carrello(){
+    this.home_service.svuota_carrello().subscribe(data=>{
+      console.log("carrello svuotato ", data)
+      this.loadCarrello();
+      this.vuoto = true
+    })
+
+  }
+
+  stampa_quantita(codice:number){ //questo diventa un aggiorna quantità che fa una post su /carrello
+    let a =  this.carrello.map.get(codice)
     console.log("quantità ", a)
   }
 

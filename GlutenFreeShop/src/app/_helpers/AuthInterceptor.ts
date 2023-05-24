@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { catchError } from 'rxjs/operators';
+
 
 
 @Injectable()
@@ -19,7 +21,16 @@ export class AuthInterceptor implements HttpInterceptor{
         Authorization: `Bearer ${token}`
       }
     });
-    return next.handle(clonedReq);
+
+    return next.handle(clonedReq).pipe(catchError((error) => {
+      if (error instanceof HttpErrorResponse && error.status === 403) { // se scade il token
+        // && !req.url.includes('auth/login')
+        this.router.navigate(['/login'])
+        sessionStorage.clear()
+      }
+      return throwError(() => error);
+    })
+  );
   }
 
 }

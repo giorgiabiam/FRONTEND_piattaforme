@@ -8,6 +8,11 @@
 }
 
 .card{
-  display: grid;
-
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  /* box-shadow: 3px 3px 8px grey; */
+  border: solid 1px rgb(205, 229, 250);
+  margin: 10px;
 }
