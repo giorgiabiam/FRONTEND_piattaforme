@@ -8,24 +8,29 @@
   </div>
 
 
-  <div *ngIf="vuoto">
+  <div *ngIf="carrello_vuoto">
     <h2>Il tuo carrello è vuoto!</h2>
     <h3>per aggiungere prodotti al tuo carrello ritorna alla <a href="/">home page</a></h3>
   </div>
-  <div *ngIf="!vuoto">
-    <div class="card" *ngFor="let p of carrello.listaProdottiReal">
-      <img [src]="p.img" alt="product image" style="max-width: 80px;">
-      <h2>{{p.nome}}</h2>
+
+
+  <div *ngIf="!carrello_vuoto">
+    <!-- <div class="card" *ngFor="let p of carrello.listaProdottiReal"> -->
+      <div class="card" *ngFor="let p of carrello.lista">
+
+      <img [src]="p.prodotto.img" alt="product image" style="max-width: 80px;">
+      <h2>{{p.prodotto.nome}}</h2>
       <div style="display: flex; flex-direction: column; margin: 5%; justify-content: flex-end; align-items: center;">
-        <span>quantità: {{p.qta_acquistata}}</span>
-        <input type="number" class="quantity_input" min="1" value="1" [max]="p.qta"> <!-- onchange="aggiorna_quantita(p.codice)" -->
-        <button mat-raised-button color="accent" style="width: 30px;" (click)="aggiorna_quantita(p.codice)">aggiorna quantità</button>
+        <span>quantità: {{p.qta_acquist}}</span>
+        <input type="number" class="quantity_input" min="1" value="1" [max]="p.prodotto.qta" [(ngModel)]="p.qta_acquist">{{p.qta_acquist}}
+        <button mat-raised-button color="accent" style="width: 30px;" (click)="aggiorna_quantita(p)">aggiorna quantità</button>
         <button mat-icon-button color="accent"><mat-icon>done</mat-icon></button>
       </div>
       <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 10%;">
-        <span style="font-weight: 400; font-size: 18px;">{{p.prezzo}}€ </span>
-        <button mat-icon-button (click)="rimuovi_dal_carrello(p)"><mat-icon>delete</mat-icon></button>
+        <span style="font-weight: 400; font-size: 18px;">{{p.prodotto.prezzo}}€ </span>
+        <button mat-icon-button (click)="rimuovi_dal_carrello(p.prodotto)"><mat-icon>delete</mat-icon></button>
       </div>
+
     </div>
     <br>
     <h2>Toale: {{carrello.totale.toFixed(2)}}€</h2>
