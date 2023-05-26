@@ -14,18 +14,6 @@
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
-.quantity_input{
-  width: 40px;
-  background-color: #fff;
-  border: 0;
-  border-radius: 2px;
-  margin-left: 10px;
-  /* padding-left: 2px; */
-}
-
-.quantity_input:focus-visible {
-   outline:  auto 0px;  /*-webkit-focus-ring-color */
-}
 
 .nav-search{
   display: flex;

@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Acquisto } from 'src/app/models/Acquisto';
 import { Utente } from 'src/app/models/Utente';
@@ -28,6 +29,8 @@ export class AreaPersonaleComponent {
   sign_lastname:String='';
   sign_address:String='';
   signin_ok: boolean = false;
+
+  password_control = new FormControl('', [Validators.required, Validators.minLength(4)]);
 
   constructor(private user_service: UserService, private home_service: HomeService, private router:Router) {
     this.acquisti = []

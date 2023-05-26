@@ -19,7 +19,7 @@
         <button mat-raised-button (click)="addToCart(p)" class="shopping_cart_button">
           <mat-icon class="shopping_cart">shopping_cart</mat-icon>Aggiungi al carrello
         </button>
-        <input type="number" [(ngModel)]="qta_acquistata" value="1" min="1" [max]="p.qta" placeholder="quantità" class="quantity_input" >
+        <!-- <input type="number" [(ngModel)]="quantita" value="1" min="1" [max]="p.qta" class="quantity_input" > -->
         <br><br>
         <span style="font-size: 21px; font-weight: 500; margin-left: 10px;">{{p.prezzo}}€</span>
       </mat-card-actions>

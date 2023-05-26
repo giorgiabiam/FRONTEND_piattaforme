@@ -25,8 +25,8 @@ export class AuthInterceptor implements HttpInterceptor{
     return next.handle(clonedReq).pipe(catchError((error) => {
       if (error instanceof HttpErrorResponse && error.status === 403) { // se scade il token
         // && !req.url.includes('auth/login')
-        this.router.navigate(['/login'])
         sessionStorage.clear()
+        this.router.navigate(['/login'])
       }
       return throwError(() => error);
     })

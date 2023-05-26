@@ -15,12 +15,15 @@
    <form *ngIf="!nuovoUtente && !loggato">
     <div class="card">
       <h2>LOGIN</h2>
+      <!-- TODO -->
+      <h3 *ngIf="!login_ok" style="color: rgb(223, 11, 11);">Il login non è andato a buon fine</h3>
+      <!--  -->
       <mat-form-field appearance="outline">
-        <label>username</label>
+        <mat-label>username</mat-label>
         <input matInput [(ngModel)]="username" required>
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <label>password</label>
+        <mat-label>password</mat-label>
         <input matInput [(ngModel)]="password" [type]="hide ? 'password' : 'text'" required>
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -38,26 +41,31 @@
     <div class="card">
       <h2>REGISTRATI</h2>
       <mat-form-field appearance="outline">
-        <label>username</label>
+        <mat-label>username</mat-label>
         <input matInput [(ngModel)]="sign_username" required>
       </mat-form-field>
+
       <mat-form-field appearance="outline">
-        <label>password</label>
-        <input matInput placeholder="minimum 4 characters" matInput [(ngModel)]="sign_password" [type]="hide ? 'password' : 'text'" required>
+        <mat-label>password</mat-label>   <!-- [formControl]="password_control"-->
+        <input matInput placeholder="minimum 4 characters"  required
+            [(ngModel)]="sign_password"  [type]="hide ? 'password' : 'text'">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
+        <!-- <mat-error *ngIf="password_control.errors?.['minlength']">La password deve essere di almeno 4 caratteri</mat-error>
+        <mat-error *ngIf="password_control.errors?.['required']">La password non può essere</mat-error> -->
       </mat-form-field>
+
       <mat-form-field appearance="outline">
-        <label>first name</label>
+        <mat-label>first name</mat-label>
         <input matInput [(ngModel)]="sign_firstname" required>
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <label>last name</label>
+        <mat-label>last name</mat-label>
         <input matInput [(ngModel)]="sign_lastname" required>
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <label>address</label>
+        <mat-label>address</mat-label>
         <input matInput [(ngModel)]="sign_address" placeholder="Es: Via Aldo Moro, 24 Torano Castello" required>
       </mat-form-field>
       <button mat-raised-button color="primary" (click)="signin()">Sign in</button>
