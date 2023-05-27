@@ -21,10 +21,6 @@ export class HomeService {
     return this.http.post("https://localhost:8443/carrello", {codice_prodotto, qta}, httpOptions);
   }
 
-  addToCart_nuovo(codice_prodotto : number, qta:number){
-    return this.http.post("https://localhost:8443/carrello/aggiungicarrelloitem", {codice_prodotto, qta}, httpOptions);
-  }
-
   getCarrello(){
     return this.http.get("https://localhost:8443/carrello", httpOptions);
   }

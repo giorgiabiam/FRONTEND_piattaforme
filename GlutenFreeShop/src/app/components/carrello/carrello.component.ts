@@ -96,7 +96,7 @@ export class CarrelloComponent implements OnInit {
   }
 
   aggiorna_quantita(itemCArrello:ItemCarrello){
-     this.home_service.addToCart_nuovo(itemCArrello.prodotto.codice, itemCArrello.qta_acquist).subscribe(data=>{
+     this.home_service.addToCart(itemCArrello.prodotto.codice, itemCArrello.qta_acquist).subscribe(data=>{
       debugger;
        console.log("DATA", data)
        this.carrello = JSON.parse(JSON.stringify(data))

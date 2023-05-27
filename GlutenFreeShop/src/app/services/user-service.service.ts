@@ -23,7 +23,7 @@ export class UserService {
   }
 
   public signin(nuovoUtente: Utente){
-    return this.http.post("https://localhost:8443/utenti/auth/register", nuovoUtente, httpOptions);
+    return this.http.post("https://localhost:8443/utenti/auth/registrazione", nuovoUtente, httpOptions);
   }
 
   getById(id_utente: any){

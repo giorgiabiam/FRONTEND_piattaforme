@@ -51,11 +51,12 @@ export class AreaPersonaleComponent {
 
   login(){
     this.user_service.login(this.username, this.password).subscribe({
-      next:data =>{ //login andato a buon fine
+      next:data =>{
 
         console.log("LOGIN----", data)  //data nel back è di tipo JwtResponse che ha (String jwt, int idUtente)
         this.login_ok = true;
         this.loggato = true;
+
         let response = JSON.parse(JSON.stringify(data));
         const jwt = response.token
         const idutente = response.idutente
@@ -69,15 +70,16 @@ export class AreaPersonaleComponent {
       error:err =>{
         this.login_ok = false;
         this.loggato = false;
-        console.log("error", err);
+        console.log("errore login", err);
 
-        //TODO comunca error message visivamente
+        //TODO comuncare errore visivamente
       }
     });
   }
 
   getUser(){
     let id = sessionStorage.getItem("user_id")
+
     this.user_service.getById(id).subscribe(data=>{
       console.log("GET USER", data)
       this.utente = JSON.parse(JSON.stringify(data));
@@ -104,21 +106,28 @@ export class AreaPersonaleComponent {
     let newUtente = new Utente( this.sign_username, this.sign_password, this.sign_firstname, this.sign_lastname,
                             this.sign_address, "USER");
 
-    this.user_service.signin(newUtente).subscribe(data=>{
-          console.log("SIGNIN----", data)
-          if(data==null){
-            this.signin_ok = false;
-            this.loggato = false;
-          }
-          else{
-            //signin andato a buon fine
-            this.signin_ok = true;
-            this.loggato = true;
+    this.user_service.signin(newUtente).subscribe({
+      next:data=>{
+        console.log("SIGNIN----", data)  // restituisce un JwtResponse formato da id_utente e jwt
+        this.signin_ok = true;
+        this.loggato = true;
 
-            let response = JSON.parse(JSON.stringify(data));
-            sessionStorage.setItem("user_id", response.utente.id);
-          }
-        });
+        let response = JSON.parse(JSON.stringify(data));
+        const jwt = response.token
+        const idutente = response.idutente
+
+        sessionStorage.setItem("user_id", idutente);
+        sessionStorage.setItem("token", jwt);
+
+        this.getUser()
+      },
+      error:error=>{
+        this.signin_ok = false;
+        this.loggato = false;
+        console.log("errore signin", error)
+      }
+
+    });
   }
 
   logout(){

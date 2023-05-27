@@ -22,12 +22,18 @@ export class AuthInterceptor implements HttpInterceptor{
       }
     });
 
+    //TODO if (req.url.includes('admin')) può accedere solo if(token includes role ADMIN)
+
     return next.handle(clonedReq).pipe(catchError((error) => {
-      if (error instanceof HttpErrorResponse && error.status === 403) { // se scade il token
-        // && !req.url.includes('auth/login')
+      if ( error instanceof HttpErrorResponse && error.status === 403 ) {
         sessionStorage.clear()
         this.router.navigate(['/login'])
       }
+
+      // if (error instanceof HttpErrorResponse && error.status === 403 && req.url.includes('auth/register') ) {
+      //   this.router.navigate([''])
+      // }
+
       return throwError(() => error);
     })
   );
