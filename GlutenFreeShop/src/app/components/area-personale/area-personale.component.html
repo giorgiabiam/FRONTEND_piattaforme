@@ -40,6 +40,11 @@
   <form *ngIf="nuovoUtente && !loggato" >
     <div class="card">
       <h2>REGISTRATI</h2>
+
+       <!-- TODO -->
+       <h3 *ngIf="!signin_ok" style="color: rgb(223, 11, 11);">Il login non è andato a buon fine</h3>
+       <!--  -->
+
       <mat-form-field appearance="outline">
         <mat-label>username</mat-label>
         <input matInput [(ngModel)]="sign_username" required>
@@ -76,17 +81,28 @@
     </div>
   </form>
 
-  <div *ngIf="dialog" class="lista-acquisti-container">
-    <button mat-button (click)="dialog=false">
-      <mat-icon>close</mat-icon>
-    </button>
-    <h2>Lista acquisti effettuati</h2>
-    <div *ngFor="let acq of acquisti" class="card-acquisto">
-      {{acq.id}}
-      <span>Data acquisto: {{acq.dataAcquisto.substring(0,16)}}</span>
-      <span>Totale pagato: {{acq.tot.toFixed(2)}}€</span>
-      <a style="font-size: 12px;" [routerLink]="['/dettagli', acq.id]">Dettagli ordine</a>
+  <div *ngIf="dialog">
+    <div class="header-card">
+      <button mat-button (click)="dialog=false"><mat-icon>close</mat-icon></button>
+      <h2>Lista acquisti effettuati</h2>
     </div>
+
+    <div class="lista-acquisti-container">
+        <mat-card *ngFor="let a of acquisti" class="card-acquisto">
+          <mat-card-header>
+            <mat-card-title>Acquisto {{a.id}}</mat-card-title>
+            <mat-card-subtitle>Effettuato dall'utente {{a.acquirente.username}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <h3>Data acquisto: {{a.dataAcquisto.substring(0, 16)}}</h3>
+            <ul *ngFor="let prodotto of a.listaProdotti">
+              <li> Prodotto con codice {{prodotto.codice}} - acquistati {{prodotto.qtaAcquistata}}</li>
+            </ul>
+            <h3 style="font-size: 20px; font-weight: 500;">Totale pagato: {{a.tot.toFixed(2)}}€</h3>
+          </mat-card-content>
+        </mat-card>
+    </div>
+
   </div>
 
   </div>

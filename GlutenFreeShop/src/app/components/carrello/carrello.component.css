@@ -21,10 +21,11 @@
 .quantity_input{
   width: 40px;
   background-color: #fff;
-  border: 0;
+  border: 1;
   border-radius: 2px;
 }
 
+/*
 .quantity_input:focus-visible {
-   outline:  auto 0px;  /*-webkit-focus-ring-color*/
-}
+   outline: auto 0px;
+} */

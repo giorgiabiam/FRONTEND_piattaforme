@@ -13,7 +13,7 @@ export class AuthInterceptor implements HttpInterceptor{
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let token = sessionStorage.getItem("token")
-    console.log("token in interceptor: ", token)
+    // console.log("token in interceptor: ", token)
 
     let clonedReq = req.clone({   //clona sempre la richiesta prima di manipolarla
       setHeaders: {

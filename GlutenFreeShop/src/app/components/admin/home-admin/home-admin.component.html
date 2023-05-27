@@ -1,0 +1,30 @@
+Toolbar
+<div class="toolbar">
+  <a href="#"> //TODO href
+    <img width="80px" alt="Logo" src="https://www.lineadiciotto.it/img/cms/Schermata%202019-02-17%20alle%2018-21-35.png">
+  </a>
+  <div style="margin: 2%;">
+    <span style="font-size: medium; font-style:oblique ;">Welcome - Gluten Free Shop</span>
+  </div>
+  <button mat-button color="accent" (click)="logout()" class="logout-button">Logout</button>
+</div>
+
+<div class="content">
+  <h2>ADMIN PAGE</h2>
+  <div class="card-container">
+    <mat-card>
+    <mat-card-content>
+      <button mat-button color="primary" (click)="utenti()">Visualizza gli utenti</button>
+    </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-content>
+        <button mat-button color="primary" (click)="acquisti()">Visualizza gli acquisti</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>
+
+

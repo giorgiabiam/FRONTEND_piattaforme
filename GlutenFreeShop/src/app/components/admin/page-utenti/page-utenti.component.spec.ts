@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DettagliOrdineComponent } from './dettagli-ordine.component';
+import { PageUtentiComponent } from './page-utenti.component';
 
-describe('DettagliOrdineComponent', () => {
-  let component: DettagliOrdineComponent;
-  let fixture: ComponentFixture<DettagliOrdineComponent>;
+describe('PageUtentiComponent', () => {
+  let component: PageUtentiComponent;
+  let fixture: ComponentFixture<PageUtentiComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DettagliOrdineComponent ]
+      declarations: [ PageUtentiComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DettagliOrdineComponent);
+    fixture = TestBed.createComponent(PageUtentiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

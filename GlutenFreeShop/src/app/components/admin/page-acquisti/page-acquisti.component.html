@@ -1,0 +1,17 @@
+<div class="container">
+  <mat-card *ngFor="let a of lista_acquisti" class="card">
+    <mat-card-header>
+      <mat-card-title>Acquisto {{a.id}}</mat-card-title>
+      <mat-card-subtitle>Effettuato dall'utente {{a.acquirente.username}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <h3>Data acquisto: {{a.dataAcquisto.substring(0, 16)}}</h3>
+      <ul *ngFor="let prodotto of a.listaProdotti">
+        <li> Prodotto con codice {{prodotto.codice}} - acquistati {{prodotto.qtaAcquistata}}</li>
+      </ul>
+      <h3>Totale pagato: {{a.tot.toFixed(2)}}€</h3>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

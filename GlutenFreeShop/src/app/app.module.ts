@@ -9,6 +9,9 @@ import { HomeComponent } from './components/home/home.component';
 import { ProdottiComponent } from './components/prodotti/prodotti.component';
 import { CarrelloComponent } from './components/carrello/carrello.component';
 import { AreaPersonaleComponent } from './components/area-personale/area-personale.component';
+import { HomeAdminComponent } from './components/admin/home-admin/home-admin.component';
+import { PageUtentiComponent } from './components/admin/page-utenti/page-utenti.component';
+import { PageAcquistiComponent } from './components/admin/page-acquisti/page-acquisti.component';
 
 import { HomeService } from './services/home-service.service';
 import { UserService } from './services/user-service.service';
@@ -25,7 +28,6 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatInputModule} from '@angular/material/input';
-import { DettagliOrdineComponent } from './components/dettagli-ordine/dettagli-ordine.component';
 
 
 
@@ -36,7 +38,9 @@ import { DettagliOrdineComponent } from './components/dettagli-ordine/dettagli-o
     ProdottiComponent,
     CarrelloComponent,
     AreaPersonaleComponent,
-    DettagliOrdineComponent
+    HomeAdminComponent,
+    PageUtentiComponent,
+    PageAcquistiComponent
   ],
   imports: [
     HttpClientModule,

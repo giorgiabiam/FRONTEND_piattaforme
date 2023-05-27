@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Prodotto } from '../models/Prodotto';
-import { Carrello } from '../models/Carrello';
 
 const httpOptions={
   headers: new HttpHeaders({})
@@ -38,7 +37,7 @@ export class HomeService {
     return this.http.delete("https://localhost:8443/carrello/"+id_prodotto, httpOptions)
   }
 
-  getAcquistoById(id_acq:number){
+  getAcquistoById(id_acq:number){ //TODO forse non serve più
     return this.http.get("https://localhost:8443/acquisti/"+id_acq, httpOptions)
   }
 

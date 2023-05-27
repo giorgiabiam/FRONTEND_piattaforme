@@ -7,7 +7,7 @@ export class Prodotto{
   descrizione:string
   prezzo:number
 
-  qta_acquistata:number
+  qtaAcquistata:number
 
   constructor(codice : number , nome:string, qta:number,prezzo:number, descrizione:string, img:string){
     this.codice = codice
@@ -17,7 +17,7 @@ export class Prodotto{
     this.prezzo = prezzo
     this.descrizione = descrizione
 
-    this.qta_acquistata = 1
+    this.qtaAcquistata = 1
   }
 
 }

@@ -37,8 +37,8 @@ export class AreaPersonaleComponent {
   }
 
   ngOnInit() {
-    console.log("area-personale -> utente:", sessionStorage.getItem("user_id"))
-    console.log("area-personale -> token:", sessionStorage.getItem("token"))
+    // console.log("area-personale -> utente:", sessionStorage.getItem("user_id"))
+    // console.log("area-personale -> token:", sessionStorage.getItem("token"))
 
     if(sessionStorage.getItem("user_id")==null){
       this.loggato = false
@@ -86,9 +86,11 @@ export class AreaPersonaleComponent {
         console.log("acquisti dell'utente ",id, ": ", data)
         let lista:Acquisto[] = []
 
+        //TODO controlla cosa arriva dal server
+
         for(let a of JSON.parse(JSON.stringify(data))){
           console.log("A: ", a)
-          let acquisto:Acquisto = new Acquisto(a.dataAcquisto, a.listaProdotti, a.tot, a.id)
+          let acquisto:Acquisto = new Acquisto(a.dataAcquisto, a.listaProdotti, a.tot, a.id, this.utente)
           lista.push(acquisto)
         }
         this.acquisti = lista
@@ -100,7 +102,7 @@ export class AreaPersonaleComponent {
 
   signin(){
     let newUtente = new Utente( this.sign_username, this.sign_password, this.sign_firstname, this.sign_lastname,
-                            this.sign_address );
+                            this.sign_address, "USER");
 
     this.user_service.signin(newUtente).subscribe(data=>{
           console.log("SIGNIN----", data)

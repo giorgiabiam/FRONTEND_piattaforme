@@ -14,7 +14,6 @@ import { UserService } from 'src/app/services/user-service.service';
 })
 export class CarrelloComponent implements OnInit {
   carrello!: Carrello;
-  vuoto:boolean = true;
   carrello_vuoto:boolean = true;
 
   ok_acquisto!:any
@@ -25,7 +24,7 @@ export class CarrelloComponent implements OnInit {
     let id_utente = sessionStorage.getItem("user_id")
     if(id_utente==null){
       this.home_service.svuota_carrello();
-      this.vuoto = true
+      this.carrello_vuoto = true
     }
     this.loadCarrello();
   }
@@ -35,46 +34,27 @@ export class CarrelloComponent implements OnInit {
       this.carrello = JSON.parse(JSON.stringify(data))
       console.log("CARRELLO", this.carrello)
       console.log("lista", this.carrello.lista)
+      console.log("totale", this.carrello.totale)
+
       if(this.carrello.lista.length != 0){
         this.carrello_vuoto = false
       }
-      // let nuova_map = new Map<number, number>();
-
-      // let nuova_lista: Prodotto[] = []
-
-      //  for(let i=0;  i<this.carrello.listaProdottiReal.length ; i++){
-      //    let p:Prodotto = this.carrello.listaProdottiReal[i]
-      //    let nuovo_p:Prodotto = new Prodotto(p.codice, p.nome, p.qta, p.prezzo, p.descrizione, p.img);
-      //    // nuova_lista.push(nuovo_p)
-      //    nuova_map.set(this.carrello.listaProdottiReal[i].codice, 1)
-      //    //this.carrello.map.get(this.carrello.listaProdottiReal[i].codice)
-      //  }
-
-      //  this.carrello.map = nuova_map
-      //  console.log("MAP dopo", this.carrello.map)
-      // this.carrello.listaProdottiReal = nuova_lista
-      // console.log("lista dopo", this.carrello.listaProdottiReal)
-
-      // if(this.carrello.totale == 0){
-      //   this.vuoto = true
-      // }
-      // else{
-      //   this.vuoto = false
-      // }
     })
 
-    console.log("carrello -> user id:", sessionStorage.getItem("user_id"))
-    console.log("carrello -> token:", sessionStorage.getItem("token"))
+    // console.log("carrello -> user id:", sessionStorage.getItem("user_id"))
+    // console.log("carrello -> token:", sessionStorage.getItem("token"))
   }
 
   rimuovi_dal_carrello(p:Prodotto){
-    console.log("tolgo dal carrello ", p)
-    this.home_service.removeFromCart(p.codice).subscribe(data=>{
-      if(data==null){ //rimozione non è andata a buon fine
-        console.log("errore rimozione")
+    this.home_service.removeFromCart(p.codice).subscribe({
+      next:data=>{
+        console.log("rimozione prodotto", p, data)
+        this.loadCarrello()
+      },
+      error:err=>{
+        console.log("errore rimozione", err)   //TODO rimozione non è andata a buon fine
       }
-      this.loadCarrello()
-    });
+    })
   }
 
   procedi(){
@@ -85,8 +65,7 @@ export class CarrelloComponent implements OnInit {
 
     // se il carrello è vuoto non deve fare l'acquisto
     if(this.carrello.totale==0){
-      alert("non puoi acquistare un carrello vuoto!")
-      this.vuoto=true
+      this.carrello_vuoto=true
       return
     }
 
@@ -96,7 +75,7 @@ export class CarrelloComponent implements OnInit {
         this.ok_acquisto = true
         this.home_service.svuota_carrello().subscribe( data=>{
           console.log("carrello svuotato dopo l'acquisto", data);
-          this.vuoto = true
+          this.carrello_vuoto = true
         });
       },
       error: err=>{ //TODO gestisci errore di quantità non disponibile
@@ -111,29 +90,16 @@ export class CarrelloComponent implements OnInit {
     this.home_service.svuota_carrello().subscribe(data=>{
       console.log("carrello svuotato ", data)
       this.loadCarrello();
-      this.vuoto = true
+      this.carrello_vuoto = true
     })
 
   }
 
   aggiorna_quantita(itemCArrello:ItemCarrello){
-  //   let x = 5
-  //    this.carrello.map.set(codice_prodotto, x)
-  //     for(let i=0;  i<this.carrello.listaProdottiReal.length ; i++){
-  //       if(this.carrello.listaProdottiReal[i].codice == codice_prodotto){
-  //         this.carrello.listaProdottiReal[i].qta_acquistata = x
-
-  //       }
-  //     }
-  //    console.log("map con nuova quantità ", this.carrello.map)
-  //    console.log("lista con nuova quantità ", this.carrello.listaProdottiReal)
-
-  //  // TODO BACKEND fare una post su /carrello
      this.home_service.addToCart_nuovo(itemCArrello.prodotto.codice, itemCArrello.qta_acquist).subscribe(data=>{
       debugger;
        console.log("DATA", data)
        this.carrello = JSON.parse(JSON.stringify(data))
-
      })
 
   }
