@@ -9,11 +9,13 @@
 }
 
 .card{
-  display: grid;
-  grid-template-columns: 400px;
-  gap: 1px 0px;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
   border: solid 1px cadetblue;
+  align-items: center;
+  min-width: 400px;
 }
 
 mat-form-field{

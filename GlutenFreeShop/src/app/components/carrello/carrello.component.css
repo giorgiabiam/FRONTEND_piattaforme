@@ -29,3 +29,7 @@
 .quantity_input:focus-visible {
    outline: auto 0px;
 } */
+
+.banner{
+  display: flex; flex-direction: column; align-items: center;
+}

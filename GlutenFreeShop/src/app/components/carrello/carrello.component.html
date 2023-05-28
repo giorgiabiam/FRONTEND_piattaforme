@@ -1,16 +1,17 @@
 <div class="container" >
-  <div *ngIf="ok_acquisto==true">
-    <h2 style="color: rgb(9, 186, 83);"> Acquisto andato a buon fine! </h2>
+  <div *ngIf="ok_acquisto==true" class="banner">
+    <h2 style="color: rgb(0, 150, 62);"> Acquisto andato a buon fine! </h2>
+    <h3 style="color: rgb(0, 150, 62);"> Presto il tuo ordine verrà spedito all'indirizzo che ci hai cominucato durante la registrazione: {{indirizzo}} </h3>
   </div>
-  <div *ngIf="ok_acquisto==false">
+  <div *ngIf="ok_acquisto==false" class="banner">
     <h2 style="color: rgb(223, 11, 11);"> Attenzione!</h2>
     <h3 style="color: rgb(223, 11, 11);">L'acquisto non è andato a buon fine perchè la quantità selezionata non è disponibile in magazzino</h3>
   </div>
 
 
-  <div *ngIf="carrello_vuoto">
+  <div *ngIf="carrello_vuoto" class="banner">
     <h2>Il tuo carrello è vuoto!</h2>
-    <h3>per aggiungere prodotti al tuo carrello ritorna alla <a href="/">home page</a></h3>
+    <h3>Per aggiungere prodotti al tuo carrello ritorna alla <a href="/">home page</a></h3>
   </div>
 
 

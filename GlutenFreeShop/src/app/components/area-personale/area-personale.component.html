@@ -13,6 +13,10 @@
   </div>
 
    <form *ngIf="!nuovoUtente && !loggato">
+    <div *ngIf="!nuovoUtente && signin_ok" style="display: flex; flex-direction: column; align-items: center;">
+      <h2 style="color: rgb(0, 150, 62);">Benvenuto in Gluten Free Shop!</h2>
+      <h3 style="color: rgb(0, 150, 62);">La registrazione è andata a buon fine. Fai login per cominciare a fare acquisti</h3>
+    </div>
     <div class="card">
       <h2>LOGIN</h2>
       <!-- TODO -->
@@ -44,6 +48,7 @@
       <mat-form-field appearance="outline">
         <mat-label>username</mat-label>
         <input matInput [(ngModel)]="sign_username" required>
+        <mat-error *ngIf="username_control.errors?.['minlength']">Il campo username non può essere vuoto</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -55,7 +60,7 @@
         </button>
 
         <mat-error *ngIf="password_control.errors?.['minlength']">La password deve essere di almeno 4 caratteri</mat-error>
-        <mat-error *ngIf="password_control.errors?.['required']">La password non può essere</mat-error>
+        <mat-error *ngIf="password_control.errors?.['required']">Il campo password non può essere vuoto</mat-error>
 
       </mat-form-field>
 
@@ -71,7 +76,7 @@
         <mat-label>address</mat-label>
         <input matInput [(ngModel)]="sign_address" placeholder="Es: Via Aldo Moro, 24 Torano Castello" required>
       </mat-form-field>
-      <button mat-raised-button color="primary" (click)="signin()">Sign in</button>
+      <button mat-raised-button color="primary" (click)="signin()">Registrati</button>
       <br>
       <span>
         Hai già un account? <button mat-button color="primary" (click)="nuovoUtente=false">accedi</button>
@@ -83,6 +88,8 @@
     <div class="header-card">
       <button mat-button (click)="dialog=false"><mat-icon>close</mat-icon></button>
       <h2>Lista acquisti effettuati</h2>
+
+      <span *ngIf="acquisti.length == 0">Non hai ancora effettuato un acquisto. Vai alla <a href="/">home</a> per aggiungere prodotti al tuo carrello!</span>
     </div>
 
     <div class="lista-acquisti-container">
