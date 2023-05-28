@@ -26,7 +26,7 @@ export class HomeAdminComponent implements OnInit{
 
   logout(){
     sessionStorage.clear()
-    this.router.navigate(['login'])
+    this.router.navigate(['logout'])
     window.location.reload();
   }
 

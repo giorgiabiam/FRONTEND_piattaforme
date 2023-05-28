@@ -119,7 +119,7 @@ export class AreaPersonaleComponent {
         // this.loggato = true;
 
         let response = JSON.parse(JSON.stringify(data));
-        console.log("SIGNIN----", response)  // TODO restituisce solo l'utente ma deve restituire anche il jwt !!!!
+        console.log("SIGNIN----", response)  // TODO restituisce solo l'utente ma deve restituire anche il JWT !!!!
 
         // sessionStorage.setItem("user_id", response.id)
         // console.log("in signin user id",sessionStorage.getItem("user_id"))
@@ -151,7 +151,8 @@ export class AreaPersonaleComponent {
   }
 
   showAcquisti(){
-    // this.getUser();
+    let id = sessionStorage.getItem("user_id")
+    this.getAcquisti(id);
     this.dialog = true;
   }
 
