@@ -1,12 +1,12 @@
+import { Acquisto } from "./Acquisto";
+
 export class Utente{
-  //ID: number;
   username: String;
   password: String;
   nome: String;
   cognome: String;
   indirizzo: String;
-  ruolo: String
-
+  ruolo: String;
 
   constructor(username: String, password:String, nome:String, cognome:String, indirizzo:String, ruolo: String){
       this.username=username;
@@ -14,6 +14,6 @@ export class Utente{
       this.nome=nome;
       this.cognome=cognome;
       this.indirizzo=indirizzo;
-      this.ruolo = ruolo
+      this.ruolo = ruolo;
   }
 }

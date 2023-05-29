@@ -3,7 +3,6 @@
   flex-direction: column;
   gap: 10px;
   margin-top: 10%;
-  /* padding: 5%; */
   min-width: 600px;
   justify-content: center;
   align-items: center;
@@ -11,6 +10,10 @@
 
 .card{
   width: 80%;
+  display: flex;
+  border: solid 1px rgb(205, 229, 250);
+  margin: 10px;
+  padding: 2%;
 }
 
 

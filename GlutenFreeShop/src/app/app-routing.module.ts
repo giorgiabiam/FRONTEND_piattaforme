@@ -16,8 +16,9 @@ const routes: Routes = [
   },
   { path: 'admin', component: HomeAdminComponent,
     children:[{ path: 'utenti', component: PageUtentiComponent }, { path: 'acquisti', component: PageAcquistiComponent },
-              { path: 'logout', redirectTo: 'login', }] //TODO
+              { path: 'logout', redirectTo: '/login', }]
   }
+
 ];
 
 @NgModule({

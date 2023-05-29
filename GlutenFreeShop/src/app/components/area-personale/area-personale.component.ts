@@ -5,6 +5,8 @@ import { Acquisto } from 'src/app/models/Acquisto';
 import { Utente } from 'src/app/models/Utente';
 import { HomeService } from 'src/app/services/home-service.service';
 import { UserService } from 'src/app/services/user-service.service';
+import jwt_decode from "jwt-decode";
+
 
 @Component({
   selector: 'app-area-personale',
@@ -17,7 +19,7 @@ export class AreaPersonaleComponent {
   password:String='';
   acquisti:Acquisto[];
 
-  login_ok: boolean = false;
+  login_ok: any;
   nuovoUtente: boolean=true;
   hide: boolean= true;
   loggato : boolean = false;   //questo lo dovrei mandare al parent
@@ -29,7 +31,7 @@ export class AreaPersonaleComponent {
   sign_firstname:String='';
   sign_lastname:String='';
   sign_address:String='';
-  signin_ok: boolean = false;
+  signin_ok: any;
 
   username_control = new FormControl('', [Validators.required, Validators.minLength(1)]);
   password_control = new FormControl('', [Validators.required, Validators.minLength(4)]);
@@ -57,7 +59,7 @@ export class AreaPersonaleComponent {
 
   login(){
     if(this.username_control.errors || this.username.trim().length == 0 || this.password_control.errors){
-      //TODO controllo sui form control per vedere se tutti i campi sono validi prima di procedere
+      // controllo sui form per vedere se tutti i campi sono validi prima di procedere
       console.log("errore login")
     }
     else{
@@ -65,28 +67,31 @@ export class AreaPersonaleComponent {
           next:data =>{
 
             console.log("LOGIN----", data)  //data nel back è di tipo JwtResponse che ha (String jwt, int idUtente)
-            this.login_ok = true;
-            this.loggato = true;
-
             let response = JSON.parse(JSON.stringify(data));
             const jwt = response.token
             const idutente = response.idutente
+            sessionStorage.setItem('user_id', idutente);
+            sessionStorage.setItem('token', jwt);
 
-            sessionStorage.setItem("user_id", idutente);
-            sessionStorage.setItem("token", jwt);
+            let decoded_jwt: string | any = jwt_decode(!!jwt? jwt :'')
+            console.log("decoded", decoded_jwt)
 
+            if( decoded_jwt.ruolo == "ADMIN"){
+              this.router.navigate(['/admin'])
+            }
+            else{
+              this.login_ok = true;
+              this.loggato = true;
+              this.messaggio_signin = false;
 
-            this.messaggio_signin = false
-
-            this.getUser();
+              this.getUser();
+            }
           },
 
           error:err =>{
             this.login_ok = false;
             this.loggato = false;
             console.log("errore login", err);
-
-            //TODO comuncare errore visivamente
           }
         });
     }
@@ -100,15 +105,12 @@ export class AreaPersonaleComponent {
     this.user_service.getById(id).subscribe(data=>{
       console.log("GET USER", data)
       this.utente = JSON.parse(JSON.stringify(data));
-
-    //  this.getAcquisti(id);
-
     })
   }
 
   getAcquisti(id:string|null){
     this.user_service.getAcquisti(id).subscribe(data=>{
-      console.log("acquisti dell'utente ",id, ": ", data)   //TODO non stampa nulla
+      console.log("acquisti dell'utente ",id, ": ", data)
       let lista:Acquisto[] = []
 
       for(let a of JSON.parse(JSON.stringify(data))){
@@ -122,36 +124,29 @@ export class AreaPersonaleComponent {
   }
 
   signin(){
-    if(this.username_control.errors || this.sign_username.trim().length == 0 || this.password_control.errors || this.sign_password.trim().length == 0
-        || this.first_name_control.errors || this.sign_firstname.trim().length == 0 || this.last_name_control.errors
-          || this.sign_lastname.trim().length == 0 || this.address_control.errors || this.sign_address.trim.length == 0){
-      //TODO controllo sui form control per vedere se tutti i campi sono validi prima di procedere
-      console.log("errore signin")
+    if(this.username_control.errors || this.sign_username.trim().length == 0 || this.password_control.errors
+        || this.first_name_control.errors || this.last_name_control.errors || this.address_control.errors){
+      //faccio un controllo sui form control per vedere se tutti i campi sono validi prima di procedere
+      console.log("errore signin control form")
     }
     else{
       let newUtente = new Utente( this.sign_username.trim().toLowerCase(), this.sign_password.trim(), this.sign_firstname, this.sign_lastname,
                             this.sign_address, "USER");
 
-      console.log("nuovo utente", newUtente)
+      console.log("nuovo utente----", newUtente)
 
       this.user_service.signin(newUtente).subscribe({
         next:data=>{
           this.signin_ok = true;
-          // this.loggato = true;
 
           let response = JSON.parse(JSON.stringify(data));
-          console.log("SIGNIN----", response)  // TODO restituisce solo l'utente ma deve restituire anche il JWT !!!!
+          console.log("SIGNIN----", response)
 
-          // sessionStorage.setItem("user_id", response.id)
-          // console.log("in signin user id",sessionStorage.getItem("user_id"))
-
-          // this.getUser()
           this.nuovoUtente = false
           this.messaggio_signin = true
         },
         error:error=>{
           this.signin_ok = false;
-          // this.loggato = false;
           console.log("errore signin", error)
         }
 
@@ -164,7 +159,6 @@ export class AreaPersonaleComponent {
   logout(){
     sessionStorage.clear();
     window.location.reload();
-    this.router.navigate(['login'])  //TODO redirect a home
     this.home_service.svuota_carrello().subscribe(data=>{
       console.log("carrello al logout", data)
     })

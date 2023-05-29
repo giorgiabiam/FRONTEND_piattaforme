@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
-
 
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor{
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private activated_route: ActivatedRoute) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let token = sessionStorage.getItem("token")
-    // console.log("token in interceptor: ", token)
+    let token:string | null = sessionStorage.getItem("token")
 
     let clonedReq = req.clone({   //clona sempre la richiesta prima di manipolarla
       setHeaders: {
@@ -22,17 +20,11 @@ export class AuthInterceptor implements HttpInterceptor{
       }
     });
 
-    //TODO if (req.url.includes('admin')) può accedere solo if(token includes role ADMIN)
-
     return next.handle(clonedReq).pipe(catchError((error) => {
-      if ( error instanceof HttpErrorResponse && error.status === 403 ) {
+      if ( error instanceof HttpErrorResponse && error.status === 403) {
         sessionStorage.clear()
         this.router.navigate(['/login'])
       }
-
-      // if (error instanceof HttpErrorResponse && error.status === 403 && req.url.includes('auth/register') ) {
-      //   this.router.navigate([''])
-      // }
 
       return throwError(() => error);
     })

@@ -1,4 +1,7 @@
 <div class="container">
+  <div *ngIf="vuoto">
+    <h2>Nessun acquisto effettuato</h2>
+  </div>
   <mat-card *ngFor="let a of lista_acquisti" class="card">
     <mat-card-header>
       <mat-card-title>Acquisto {{a.id}}</mat-card-title>
@@ -10,7 +13,7 @@
         <img [src]="p.prodottoReale.img" alt="product image" style="max-width: 60px;">
         <h2 style="font-size: 17px;">{{p.prodottoReale.nome}} - acquistati {{p.qtaAcquistata}}</h2>
       </div>
-      <h3>Totale pagato: {{a.tot.toFixed(2)}}€</h3>
+      <h3 style="font-size: 20px; font-weight: 500;">Totale pagato: {{a.tot.toFixed(2)}}€</h3>
     </mat-card-content>
   </mat-card>
 </div>

@@ -16,18 +16,17 @@ export class HomeAdminComponent implements OnInit{
   }
 
   utenti(){
-    this.router.navigate(['/utenti'])
+    this.router.navigate(['admin/utenti'])
   }
 
   acquisti(){
-    this.router.navigate(['acquisti'])
+    this.router.navigate(['admin/acquisti'])
   }
 
 
   logout(){
     sessionStorage.clear()
-    this.router.navigate(['logout'])
-    window.location.reload();
+    this.router.navigate(['admin/logout'])
   }
 
 

@@ -45,3 +45,8 @@ a{
   flex-direction: row;
   gap: 10px;
 }
+
+mat-card{
+  width: 180px;
+  align-items: center;
+}

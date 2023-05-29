@@ -10,6 +10,7 @@ import { AdminServiceService } from 'src/app/services/admin-service.service';
 export class PageAcquistiComponent implements OnInit{
 
   lista_acquisti!:Acquisto[]
+  vuoto:boolean = false
 
   constructor(private admin_service:AdminServiceService){}
 
@@ -17,6 +18,7 @@ export class PageAcquistiComponent implements OnInit{
     this.admin_service.getAcquisti().subscribe(data=>{
       console.log("ACQUISTI", data)
       this.lista_acquisti = JSON.parse(JSON.stringify(data))
+      if(this.lista_acquisti.length == 0 || this.lista_acquisti==null) this.vuoto = true
     })
   }
 

@@ -42,21 +42,16 @@ export class CarrelloComponent implements OnInit {
         this.carrello_vuoto = false
       }
     })
-
-    // console.log("carrello -> user id:", sessionStorage.getItem("user_id"))
-    // console.log("carrello -> token:", sessionStorage.getItem("token"))
   }
 
   rimuovi_dal_carrello(p:Prodotto){
     this.home_service.removeFromCart(p.codice).subscribe({
       next:data=>{
         console.log("rimozione prodotto", p, data)
-        // this.carrello = JSON.parse(JSON.stringify(data))
-
         this.loadCarrello()
       },
       error:err=>{
-        console.log("errore rimozione", err)   //TODO rimozione non è andata a buon fine
+        console.log("errore rimozione", err)
       }
     })
   }
@@ -83,7 +78,7 @@ export class CarrelloComponent implements OnInit {
           this.carrello_vuoto = true
         });
       },
-      error: err=>{ //TODO gestisci errore di quantità non disponibile
+      error: err=>{
         this.ok_acquisto = false
         console.log("errore acquisto", err)
       }

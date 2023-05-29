@@ -19,6 +19,8 @@
     </div>
     <div class="card">
       <h2>LOGIN</h2>
+      <mat-error *ngIf="login_ok == false">Login non riuscito! Username o password errati</mat-error>
+
       <mat-form-field appearance="outline">
         <mat-label>username</mat-label>
         <input matInput [(ngModel)]="username" required [formControl]="username_control">
@@ -44,6 +46,7 @@
   <form *ngIf="nuovoUtente && !loggato" >
     <div class="card">
       <h2>REGISTRATI</h2>
+      <mat-error *ngIf="signin_ok == false">Registrazione non riuscita! Username già utilizzato</mat-error>
 
       <mat-form-field appearance="outline">
         <mat-label>username</mat-label>
