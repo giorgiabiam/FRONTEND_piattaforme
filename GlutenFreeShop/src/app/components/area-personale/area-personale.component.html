@@ -19,19 +19,19 @@
     </div>
     <div class="card">
       <h2>LOGIN</h2>
-      <!-- TODO -->
-      <h3 *ngIf="!login_ok" style="color: rgb(223, 11, 11);">Il login non è andato a buon fine</h3>
-      <!--  -->
       <mat-form-field appearance="outline">
         <mat-label>username</mat-label>
-        <input matInput [(ngModel)]="username" required>
+        <input matInput [(ngModel)]="username" required [formControl]="username_control">
+        <mat-error *ngIf="username_control.errors?.['required']">Il campo username non può essere vuoto</mat-error>
+
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>password</mat-label>
-        <input matInput [(ngModel)]="password" [type]="hide ? 'password' : 'text'" required>
+        <input matInput [(ngModel)]="password" [type]="hide ? 'password' : 'text'" required [formControl]="password_control">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
+        <mat-error *ngIf="username_control.errors?.['required']">Il campo password non può essere vuoto</mat-error>
       </mat-form-field>
       <button mat-raised-button color="primary" (click)="login()">Login</button>
       <br>
@@ -47,34 +47,37 @@
 
       <mat-form-field appearance="outline">
         <mat-label>username</mat-label>
-        <input matInput [(ngModel)]="sign_username" required>
-        <mat-error *ngIf="username_control.errors?.['minlength']">Il campo username non può essere vuoto</mat-error>
+        <input matInput [(ngModel)]="sign_username" required [formControl]="username_control">
+        <mat-error *ngIf="username_control.errors?.['required'] || username_control.errors?.['minlength'] || sign_username.trim().length == 0">Il campo username non può essere vuoto</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>password</mat-label>   <!-- [formControl]="password_control"-->
-        <input matInput placeholder="minimum 4 characters"  required
+        <mat-label>password</mat-label>
+        <input matInput placeholder="minimum 4 characters"  required  [formControl]="password_control"
             [(ngModel)]="sign_password"  [type]="hide ? 'password' : 'text'">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
 
         <mat-error *ngIf="password_control.errors?.['minlength']">La password deve essere di almeno 4 caratteri</mat-error>
-        <mat-error *ngIf="password_control.errors?.['required']">Il campo password non può essere vuoto</mat-error>
+        <mat-error *ngIf="password_control.errors?.['required'] || sign_password.trim().length == 0">Il campo password non può essere vuoto</mat-error>
 
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>first name</mat-label>
-        <input matInput [(ngModel)]="sign_firstname" required>
+        <input matInput [(ngModel)]="sign_firstname" required [formControl]="first_name_control">
+        <mat-error *ngIf="first_name_control.errors?.['required'] || sign_firstname.trim().length == 0">Il campo first name non può essere vuoto</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>last name</mat-label>
-        <input matInput [(ngModel)]="sign_lastname" required>
+        <input matInput [(ngModel)]="sign_lastname" required [formControl]="last_name_control">
+        <mat-error *ngIf="last_name_control.errors?.['required'] || sign_lastname.trim().length == 0">Il campo last name non può essere vuoto</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>address</mat-label>
-        <input matInput [(ngModel)]="sign_address" placeholder="Es: Via Aldo Moro, 24 Torano Castello" required>
+        <input matInput [(ngModel)]="sign_address" placeholder="Es: Via del Corso, 1 Roma" required [formControl]="address_control">
+        <mat-error *ngIf="address_control.errors?.['required'] || sign_address.trim().length == 0">Il campo address non può essere vuoto</mat-error>
       </mat-form-field>
       <button mat-raised-button color="primary" (click)="signin()">Registrati</button>
       <br>

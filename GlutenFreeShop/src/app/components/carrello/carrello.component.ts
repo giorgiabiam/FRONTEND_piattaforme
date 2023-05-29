@@ -101,15 +101,16 @@ export class CarrelloComponent implements OnInit {
   }
 
   aggiorna_quantita(itemCarrello:ItemCarrello){
+    console.log("aggiorna qta", itemCarrello)
     if(itemCarrello.qta_acquist == 0){
-      //TODO cazzo cazzo
+      this.rimuovi_dal_carrello(itemCarrello.prodotto)
     }
-
-    this.home_service.addToCart(itemCarrello.prodotto.codice, itemCarrello.qta_acquist).subscribe(data=>{
-       console.log("DATA", data)
-       this.carrello = JSON.parse(JSON.stringify(data))
-    })
-
+    else{
+      this.home_service.addToCart(itemCarrello.prodotto.codice, itemCarrello.qta_acquist).subscribe(data=>{
+        console.log("DATA", data)
+        this.carrello = JSON.parse(JSON.stringify(data))
+      })
+    }
   }
 
   getIndirizzo(){

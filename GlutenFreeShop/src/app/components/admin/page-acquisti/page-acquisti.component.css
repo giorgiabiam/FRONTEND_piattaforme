@@ -12,3 +12,12 @@
 .card{
   width: 80%;
 }
+
+
+.card-prodotto-reale{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 5px;
+  padding: 5px;
+}

@@ -31,8 +31,12 @@ export class AreaPersonaleComponent {
   sign_address:String='';
   signin_ok: boolean = false;
 
+  username_control = new FormControl('', [Validators.required, Validators.minLength(1)]);
   password_control = new FormControl('', [Validators.required, Validators.minLength(4)]);
-  username_control = new FormControl('', [Validators.required]);
+  first_name_control = new FormControl('', [Validators.required]);
+  last_name_control = new FormControl('', [Validators.required]);
+  address_control = new FormControl('', [Validators.required]);
+
 
   constructor(private user_service: UserService, private home_service: HomeService, private router:Router) {
     this.acquisti = []
@@ -52,34 +56,42 @@ export class AreaPersonaleComponent {
   }
 
   login(){
-    this.user_service.login(this.username, this.password).subscribe({
-      next:data =>{
+    if(this.username_control.errors || this.username.trim().length == 0 || this.password_control.errors){
+      //TODO controllo sui form control per vedere se tutti i campi sono validi prima di procedere
+      console.log("errore login")
+    }
+    else{
+      this.user_service.login(this.username, this.password).subscribe({
+          next:data =>{
 
-        console.log("LOGIN----", data)  //data nel back è di tipo JwtResponse che ha (String jwt, int idUtente)
-        this.login_ok = true;
-        this.loggato = true;
+            console.log("LOGIN----", data)  //data nel back è di tipo JwtResponse che ha (String jwt, int idUtente)
+            this.login_ok = true;
+            this.loggato = true;
 
-        let response = JSON.parse(JSON.stringify(data));
-        const jwt = response.token
-        const idutente = response.idutente
+            let response = JSON.parse(JSON.stringify(data));
+            const jwt = response.token
+            const idutente = response.idutente
 
-        sessionStorage.setItem("user_id", idutente);
-        sessionStorage.setItem("token", jwt);
+            sessionStorage.setItem("user_id", idutente);
+            sessionStorage.setItem("token", jwt);
 
 
-        this.messaggio_signin = false
+            this.messaggio_signin = false
 
-        this.getUser();
-      },
+            this.getUser();
+          },
 
-      error:err =>{
-        this.login_ok = false;
-        this.loggato = false;
-        console.log("errore login", err);
+          error:err =>{
+            this.login_ok = false;
+            this.loggato = false;
+            console.log("errore login", err);
 
-        //TODO comuncare errore visivamente
-      }
-    });
+            //TODO comuncare errore visivamente
+          }
+        });
+    }
+
+
   }
 
   getUser(){
@@ -110,31 +122,43 @@ export class AreaPersonaleComponent {
   }
 
   signin(){
-    let newUtente = new Utente( this.sign_username, this.sign_password, this.sign_firstname, this.sign_lastname,
+    if(this.username_control.errors || this.sign_username.trim().length == 0 || this.password_control.errors || this.sign_password.trim().length == 0
+        || this.first_name_control.errors || this.sign_firstname.trim().length == 0 || this.last_name_control.errors
+          || this.sign_lastname.trim().length == 0 || this.address_control.errors || this.sign_address.trim.length == 0){
+      //TODO controllo sui form control per vedere se tutti i campi sono validi prima di procedere
+      console.log("errore signin")
+    }
+    else{
+      let newUtente = new Utente( this.sign_username.trim().toLowerCase(), this.sign_password.trim(), this.sign_firstname, this.sign_lastname,
                             this.sign_address, "USER");
 
-    this.user_service.signin(newUtente).subscribe({
-      next:data=>{
-        this.signin_ok = true;
-        // this.loggato = true;
+      console.log("nuovo utente", newUtente)
 
-        let response = JSON.parse(JSON.stringify(data));
-        console.log("SIGNIN----", response)  // TODO restituisce solo l'utente ma deve restituire anche il JWT !!!!
+      this.user_service.signin(newUtente).subscribe({
+        next:data=>{
+          this.signin_ok = true;
+          // this.loggato = true;
 
-        // sessionStorage.setItem("user_id", response.id)
-        // console.log("in signin user id",sessionStorage.getItem("user_id"))
+          let response = JSON.parse(JSON.stringify(data));
+          console.log("SIGNIN----", response)  // TODO restituisce solo l'utente ma deve restituire anche il JWT !!!!
 
-        // this.getUser()
-        this.nuovoUtente = false
-        this.messaggio_signin = true
-      },
-      error:error=>{
-        this.signin_ok = false;
-        // this.loggato = false;
-        console.log("errore signin", error)
-      }
+          // sessionStorage.setItem("user_id", response.id)
+          // console.log("in signin user id",sessionStorage.getItem("user_id"))
 
-    });
+          // this.getUser()
+          this.nuovoUtente = false
+          this.messaggio_signin = true
+        },
+        error:error=>{
+          this.signin_ok = false;
+          // this.loggato = false;
+          console.log("errore signin", error)
+        }
+
+      });
+    }
+
+
   }
 
   logout(){

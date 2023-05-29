@@ -11,7 +11,7 @@
 .card{
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   justify-content: center;
   border: solid 1px cadetblue;
   align-items: center;
