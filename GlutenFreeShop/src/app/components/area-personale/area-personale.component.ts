@@ -22,7 +22,7 @@ export class AreaPersonaleComponent {
   login_ok: any;
   nuovoUtente: boolean=true;
   hide: boolean= true;
-  loggato : boolean = false;   //questo lo dovrei mandare al parent
+  loggato : boolean = false;
   dialog : boolean = false
   messaggio_signin = false
 
