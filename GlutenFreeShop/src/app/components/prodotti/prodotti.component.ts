@@ -41,10 +41,6 @@ export class ProdottiComponent {
     this.home_service.addToCart(p.codice, 1).subscribe(data =>{
       console.log("ADD -- carrello", data)
     });
-
-    // this.home_service.addToCart(p.codice, this.quantita).subscribe(data =>{
-    //   console.log("ADD -- carrello", data)
-    // });
   }
 
   search(){

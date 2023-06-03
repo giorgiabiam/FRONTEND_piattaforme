@@ -11,7 +11,6 @@ export class HomeComponent implements OnInit{
 
   loggato=false;
   parola_chiave:String = "";
-  logout_alert=false;
 
   constructor(private home_service:HomeService){}
 
